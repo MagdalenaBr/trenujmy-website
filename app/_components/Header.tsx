@@ -1,39 +1,22 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import logo from "../../public/logo.png";
 import Nav from "./Nav";
 
 function Header() {
-	const [showSidebar, setShowSidebar] = useState(false);
-	const [deviceWidth, setDeviceWidth] = useState(0);
+  return (
+    <header className="z-100 flex h-24 w-11/12 max-w-[1300px] items-center justify-between overflow-hidden">
+      <div className="relative h-20 w-28 lg:h-28 lg:w-36">
+        <Image
+          src={logo}
+          fill
+          alt="Logo o nazwie trenujmy z niemieskim ciężarkiem."
+          className="object-contain"
+        />
+      </div>
 
-	function changeNav() {
-		if (typeof window !== "undefined" && window.innerWidth < 768) {
-			setShowSidebar(true);
-		} else {
-			setShowSidebar(false);
-		}
-	}
-	useEffect(() => {
-		window.addEventListener("resize", changeNav);
-		setDeviceWidth(window.innerWidth);
-	}, []);
-
-	return (
-		<header className='flex h-24 items-center z-100 max-w-[1300px] w-11/12 justify-between'>
-			<div>
-				<Image
-					width={deviceWidth < 768 ? 110 : 110}
-					height={deviceWidth < 768 ? 120 : 150}
-					src='/logo.png'
-					alt='logo'
-				/>
-			</div>
-
-			<Nav />
-		</header>
-	);
+      <Nav />
+    </header>
+  );
 }
 
 export default Header;

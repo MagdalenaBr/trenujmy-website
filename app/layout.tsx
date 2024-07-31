@@ -6,22 +6,22 @@ import Header from "./_components/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Trenuj|My",
+  title: "Trenuj|My",
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang='pl'>
-			<body className={inter.className}>
-				<div className='bg-black/40 w-screen h-screen flex justify-center '>
-					<Header />
-					<main >{children}</main>
-				</div>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="pl">
+      <body
+        className={`${inter.className} flex h-screen w-screen justify-center overflow-hidden bg-black/40`}
+      >
+        <Header />
+        <main>{children}</main>
+      </body>
+    </html>
+  );
 }
