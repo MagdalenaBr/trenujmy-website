@@ -1,5 +1,6 @@
 import Image from "next/image";
-import img from "../../public/about-main-large.jpg";
+// import img from "../../public/about-main-large.jpg";
+import img from "../../public/about-large.jpg";
 import TextContainer from "../_components/TextContainer";
 import yogaImg from "../../public/yoga-about.jpg";
 import poleDanceImg from "../../public/poledance-about.jpg";
@@ -7,6 +8,9 @@ import aerobicImg from "../../public/aerobic-about.jpg";
 import SectionContainer from "../_components/SectionContainer";
 import SportAactivityContainer from "../_components/SportActivityContainer";
 import personalTrainerImg from "../../public/personal-trainer-about.jpg";
+import sectionImg from "../../public/about-section-image.jpg";
+import { imbue } from "../fonts";
+import Footer from "../_components/Footer";
 
 export default function Page() {
   const sportActivities = [
@@ -42,7 +46,7 @@ export default function Page() {
           src={yogaImg}
           fill
           alt="Kobieta ćwicząca jogę"
-          className="z-[-20] object-cover object-right"
+          className="z-[-20] object-cover object-center"
         />
       ),
     },
@@ -58,7 +62,12 @@ export default function Page() {
           className="z-[-50] object-cover object-center"
         />
       </div>
-      <div className="bg-lightGray">
+      <div className="bg-textLight">
+        <h1
+          className={`py-12 text-center text-8xl uppercase text-darkGray ${imbue.className}`}
+        >
+          O nas
+        </h1>
         <SectionContainer>
           <TextContainer>
             <span className="font-bold text-accentColor">Trenuj|My</span> to
@@ -76,7 +85,7 @@ export default function Page() {
             pozwalają na zróżnicowaną i angażującą aktywność fizyczną:
           </TextContainer>
         </SectionContainer>
-        <SectionContainer maxWidth="max-w-[1000px]">
+        <SectionContainer maxWidth="max-w-[1000px]" flexDirection="flex-row">
           {sportActivities.map((sportActivity) => (
             <SportAactivityContainer
               key={sportActivity.label}
@@ -87,42 +96,35 @@ export default function Page() {
             </SportAactivityContainer>
           ))}
         </SectionContainer>
-        <div className="bg-darkGray pb-20 text-textLight">
-          <div className="m-auto flex max-w-[1700px] flex-col gap-10 md:h-[30rem] md:flex-row">
-            <div className="relative h-80 md:h-[30rem] md:w-[40%]">
-              <Image
-                src={personalTrainerImg}
-                alt="Mężczyzna podnoszący ciężary, którego asekuruje drugi mężczyzna."
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="m-auto flex h-full w-11/12 items-center justify-center md:w-[60%] md:flex-col">
-              <div className="text-center">
-                <TextContainer>
-                  W Trenuj|My stawiamy na profesjonalizm i indywidualne
-                  podejście do każdego klienta. Nasi trenerzy personalni są
-                  gotowi pomóc Ci opracować spersonalizowany plan treningowy,
-                  który będzie dostosowany do Twoich potrzeb i celów.
-                </TextContainer>
-                <button className="mt-6 border-2 border-accentColor px-8 py-2 font-semibold uppercase tracking-widest text-accentColor lg:text-lg">
-                  Kadra
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="relative h-[50rem]">
+          <Image
+            alt="KKobieta podnosząca ciężary"
+            src={sectionImg}
+            fill
+            className="object-cover"
+          />
         </div>
-        {/* <div className="bg-lightGray text-textLight pb-20">
+        <div className="bg-textLight pb-20 pt-20">
           <SectionContainer>
+            <TextContainer>
+              W Trenuj|My stawiamy na profesjonalizm i indywidualne podejście do
+              każdego klienta. Nasi trenerzy personalni są gotowi pomóc Ci
+              opracować spersonalizowany plan treningowy, który będzie
+              dostosowany do Twoich potrzeb i celów.
+            </TextContainer>
             <TextContainer>
               Dołącz do nas i stań się częścią naszej społeczności, która
               wspiera się nawzajem w dążeniu do zdrowego i aktywnego stylu
               życia. Zapraszamy do Trenuj|My – miejsca, gdzie Twoje zdrowie i
               dobre samopoczucie są dla nas najważniejsze.
             </TextContainer>
+            <button className="mt-6 border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg">
+              Kadra
+            </button>
           </SectionContainer>
-        </div> */}
+        </div>
       </div>
+      <Footer />
     </>
   );
 }

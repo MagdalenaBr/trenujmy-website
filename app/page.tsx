@@ -1,11 +1,8 @@
 import Image from "next/image";
 // import bg from "../public/main-page-large.jpg";
 import bg from "../public/main-page.jpg";
-import { Baskervville } from "next/font/google";
-import { Imbue } from "next/font/google";
+import { imbue } from "./fonts";
 
-const baskervville = Baskervville({ weight: "400", subsets: ["latin"] });
-const imbue = Imbue({ weight: "700", subsets: ["latin"] });
 
 export default function Page() {
   return (
