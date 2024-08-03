@@ -4,18 +4,19 @@ import Nav from "./Nav";
 
 function Header() {
   return (
-    <header className="z-100 flex h-24 w-11/12 max-w-[1300px] items-center justify-between overflow-hidden">
-      <div className="relative h-20 w-28 lg:h-28 lg:w-36">
-        <Image
-          src={logo}
-          fill
-          alt="Logo o nazwie trenujmy z niemieskim ciężarkiem."
-          className="object-contain"
-        />
-      </div>
-
-      <Nav />
-    </header>
+    <div className=" w-full absolute">
+      <header className="z-100 flex h-24 items-center justify-between  w-11/12 max-w-[1300px] m-auto">
+        <div className="relative h-20 w-28 md:h-28 md:w-36">
+          <Image
+            src={logo}
+            fill
+            alt="Logo o nazwie trenujmy z niemieskim ciężarkiem."
+            className="object-contain "
+          />
+        </div>
+        <Nav />
+      </header>
+    </div>
   );
 }
 

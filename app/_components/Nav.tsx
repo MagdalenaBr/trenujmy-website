@@ -41,23 +41,23 @@ function Nav() {
     <>
       <button
         onClick={() => setShowMobileNav(!showMobileNav)}
-        className="absolute right-2 top-6 z-[1000] w-10 text-textLight md:hidden"
+        className="absolute right-2 top-6 z-[1000] w-10 text-textLight md:w-14 lg:hidden"
       >
         {showMobileNav === false ? <Bars3BottomRightIcon /> : <XMarkIcon />}
       </button>
       <nav
-        className={`fixed bottom-0 right-0 top-0 flex w-3/4 flex-col gap-5 overflow-hidden bg-black/60 py-16 backdrop-blur-md md:relative md:translate-x-0 md:flex-row md:justify-between md:bg-transparent md:py-0 md:backdrop-blur-none ${
+        className={`fixed bottom-0 right-0 top-0 flex w-3/4 flex-col gap-5 bg-black/60 py-16 backdrop-blur-md md:w-1/2 lg:relative lg:w-3/4 lg:translate-x-0 lg:flex-row lg:justify-between lg:bg-transparent lg:py-0 lg:backdrop-blur-none ${
           showMobileNav === true ? "translate-x-0" : "translate-x-[100%]"
         } transition-all`}
       >
         <ul
-          className={`flex flex-col gap-4 self-center px-5 py-2 md:flex-row md:bg-black/50`}
+          className={`flex flex-col gap-4 self-center px-5 py-2 tracking-wider lg:flex-row`}
         >
           {navItems.map((item) => (
             <li
               key={item.url}
-              className={`tracking- font-semibold uppercase text-textLight hover:text-accentColor ${
-                pathname === item.url ? "border-b-2 border-accentColor" : ""
+              className={`tracking- font-semibold uppercase hover:scale-110 hover:text-accentColor/70 transition-all ${
+                pathname === item.url ? "text-accentColor" : "text-textLight"
               }`}
             >
               <Link href={item.url}>{item.label}</Link>
