@@ -16,7 +16,9 @@ const config: Config = {
       },
       backgroundImage: {
         parallax: "url(../public/about-large.jpg)",
-		sectionAboutImg: "url(../public/about-section-image.jpg)",
+        parallaxSm: "url(../public/about-small.jpg)",
+        sectionAboutImg: "url(../public/about-section-image.jpg)",
+        sectionAboutImgSm: "url(../public/about-section-image-small.jpg)",
       },
     },
   },

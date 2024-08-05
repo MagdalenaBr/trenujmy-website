@@ -8,9 +8,9 @@ import Logo from "./Logo";
 export default function Footer() {
   return (
     <footer className="flex w-full flex-col items-center justify-center bg-darkGray pt-10 text-textLight">
-      <div className="flex w-11/12 max-w-[1300px] justify-between pb-10">
+      <div className="flex w-11/12 max-w-[1300px] flex-col items-center gap-6 pb-10 md:flex-row md:justify-between">
         <Logo />
-        <div>
+        <div className="w-[12rem]">
           <h3 className="pb-4 text-center uppercase text-accentColor/70">
             Kontakt
           </h3>
@@ -25,18 +25,18 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div>
+        <div className="w-[12rem]">
           <h3 className="pb-4 text-center uppercase text-accentColor/70">
             Godziny otwarcia
           </h3>
           <p className="pb-2">Poniedziałek - Sobota</p>
           <p className="pb-2">8:00 - 20:00</p>
         </div>
-        <div>
+        <div className="w-[12rem]">
           <h3 className="pb-4 text-center uppercase text-accentColor/70">
             Adres
           </h3>
-          <p className="pb-2">ul. Koszary 0</p>
+          <p className="pb-2">ul. Koszary-wiślane 0</p>
           <p className="pb-2">24-150 Lublin</p>
         </div>
       </div>

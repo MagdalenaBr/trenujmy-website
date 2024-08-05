@@ -54,14 +54,7 @@ export default function Page() {
 
   return (
     <>
-      <div className="relative z-[-20] h-64 w-screen bg-parallax bg-cover bg-fixed bg-bottom md:h-[40rem]">
-        {/* <Image
-          src={img}
-          alt="Sala siłowni na której ustawione są rowerki stacjonarne"
-          fill
-          className="z-[-50] bg-fixed object-cover object-center"
-        /> */}
-      </div>
+      <div className="bg-parallaxSm relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-center md:h-[40rem] lg:bg-parallax"></div>
       <div className="bg-textLight">
         <h1
           className={`py-12 text-center text-8xl uppercase text-darkGray ${imbue.className}`}
@@ -85,7 +78,10 @@ export default function Page() {
             pozwalają na zróżnicowaną i angażującą aktywność fizyczną:
           </TextContainer>
         </SectionContainer>
-        <SectionContainer maxWidth="max-w-[1000px]" flexDirection="flex-row">
+        <SectionContainer
+          maxWidth="max-w-[1000px]"
+          flexDirection="flex-col md:flex-row"
+        >
           {sportActivities.map((sportActivity) => (
             <SportAactivityContainer
               key={sportActivity.label}
@@ -96,10 +92,10 @@ export default function Page() {
             </SportAactivityContainer>
           ))}
         </SectionContainer>
-        <div className="relative h-[50rem] bg-sectionAboutImg bg-cover bg-fixed"></div>
+        <div className="bg-sectionAboutImgSm relative h-[35rem] bg-cover bg-fixed md:h-[50rem] md:bg-sectionAboutImg"></div>
         <div className="bg-textLight pb-20 pt-20">
           <SectionContainer>
-            <div className="flex w-full justify-around">
+            <div className="flex w-full flex-col justify-around gap-4 md:flex-row">
               <div className="max-w-[40rem]">
                 <TextContainer>
                   W Trenuj|My stawiamy na profesjonalizm i indywidualne
@@ -108,11 +104,11 @@ export default function Page() {
                   który będzie dostosowany do Twoich potrzeb i celów.
                 </TextContainer>
               </div>
-              <button className="border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg self-center">
+              <button className="self-center border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg">
                 Kadra
               </button>
             </div>
-            <div className="flex w-full justify-around">
+            <div className="flex w-full flex-col justify-around gap-4 md:flex-row">
               <div className="max-w-[40rem]">
                 <TextContainer>
                   Dołącz do nas i stań się częścią naszej społeczności, która
@@ -121,7 +117,7 @@ export default function Page() {
                   i dobre samopoczucie są dla nas najważniejsze.
                 </TextContainer>
               </div>
-              <button className="border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg self-center">
+              <button className="self-center border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg">
                 Dołącz
               </button>
             </div>
