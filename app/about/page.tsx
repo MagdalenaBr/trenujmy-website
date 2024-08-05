@@ -54,13 +54,13 @@ export default function Page() {
 
   return (
     <>
-      <div className="relative z-[-20] h-64 w-screen md:h-[40rem]">
-        <Image
+      <div className="relative z-[-20] h-64 w-screen bg-parallax bg-cover bg-fixed bg-bottom md:h-[40rem]">
+        {/* <Image
           src={img}
           alt="Sala siłowni na której ustawione są rowerki stacjonarne"
           fill
-          className="z-[-50] object-cover object-center"
-        />
+          className="z-[-50] bg-fixed object-cover object-center"
+        /> */}
       </div>
       <div className="bg-textLight">
         <h1
@@ -96,31 +96,35 @@ export default function Page() {
             </SportAactivityContainer>
           ))}
         </SectionContainer>
-        <div className="relative h-[50rem]">
-          <Image
-            alt="KKobieta podnosząca ciężary"
-            src={sectionImg}
-            fill
-            className="object-cover"
-          />
-        </div>
+        <div className="relative h-[50rem] bg-sectionAboutImg bg-cover bg-fixed"></div>
         <div className="bg-textLight pb-20 pt-20">
           <SectionContainer>
-            <TextContainer>
-              W Trenuj|My stawiamy na profesjonalizm i indywidualne podejście do
-              każdego klienta. Nasi trenerzy personalni są gotowi pomóc Ci
-              opracować spersonalizowany plan treningowy, który będzie
-              dostosowany do Twoich potrzeb i celów.
-            </TextContainer>
-            <TextContainer>
-              Dołącz do nas i stań się częścią naszej społeczności, która
-              wspiera się nawzajem w dążeniu do zdrowego i aktywnego stylu
-              życia. Zapraszamy do Trenuj|My – miejsca, gdzie Twoje zdrowie i
-              dobre samopoczucie są dla nas najważniejsze.
-            </TextContainer>
-            <button className="mt-6 border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg">
-              Kadra
-            </button>
+            <div className="flex w-full justify-around">
+              <div className="max-w-[40rem]">
+                <TextContainer>
+                  W Trenuj|My stawiamy na profesjonalizm i indywidualne
+                  podejście do każdego klienta. Nasi trenerzy personalni są
+                  gotowi pomóc Ci opracować spersonalizowany plan treningowy,
+                  który będzie dostosowany do Twoich potrzeb i celów.
+                </TextContainer>
+              </div>
+              <button className="border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg self-center">
+                Kadra
+              </button>
+            </div>
+            <div className="flex w-full justify-around">
+              <div className="max-w-[40rem]">
+                <TextContainer>
+                  Dołącz do nas i stań się częścią naszej społeczności, która
+                  wspiera się nawzajem w dążeniu do zdrowego i aktywnego stylu
+                  życia. Zapraszamy do Trenuj|My – miejsca, gdzie Twoje zdrowie
+                  i dobre samopoczucie są dla nas najważniejsze.
+                </TextContainer>
+              </div>
+              <button className="border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg self-center">
+                Dołącz
+              </button>
+            </div>
           </SectionContainer>
         </div>
       </div>

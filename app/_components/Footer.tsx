@@ -7,9 +7,9 @@ import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="flex w-full flex-col items-center justify-center gap-4 bg-darkGray pt-10 text-textLight">
-      <Logo />
-      <div className="flex w-11/12 max-w-[900px] justify-between pb-10">
+    <footer className="flex w-full flex-col items-center justify-center bg-darkGray pt-10 text-textLight">
+      <div className="flex w-11/12 max-w-[1300px] justify-between pb-10">
+        <Logo />
         <div>
           <h3 className="pb-4 text-center uppercase text-accentColor/70">
             Kontakt
