@@ -19,6 +19,7 @@ const config: Config = {
         parallaxSm: "url(../public/about-small.jpg)",
         sectionAboutImg: "url(../public/about-section-image.jpg)",
         sectionAboutImgSm: "url(../public/about-section-image-small.jpg)",
+        sectionTrainersMain: "url(../public/trainer-bg-large.jpg)"
       },
     },
   },

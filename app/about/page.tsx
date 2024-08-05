@@ -1,16 +1,13 @@
 import Image from "next/image";
 // import img from "../../public/about-main-large.jpg";
-import img from "../../public/about-large.jpg";
-import TextContainer from "../_components/TextContainer";
-import yogaImg from "../../public/yoga-about.jpg";
-import poleDanceImg from "../../public/poledance-about.jpg";
 import aerobicImg from "../../public/aerobic-about.jpg";
+import poleDanceImg from "../../public/poledance-about.jpg";
+import yogaImg from "../../public/yoga-about.jpg";
+import Footer from "../_components/Footer";
+import MainHeading from "../_components/MainHeading";
 import SectionContainer from "../_components/SectionContainer";
 import SportAactivityContainer from "../_components/SportActivityContainer";
-import personalTrainerImg from "../../public/personal-trainer-about.jpg";
-import sectionImg from "../../public/about-section-image.jpg";
-import { imbue } from "../fonts";
-import Footer from "../_components/Footer";
+import TextContainer from "../_components/TextContainer";
 
 export default function Page() {
   const sportActivities = [
@@ -56,11 +53,7 @@ export default function Page() {
     <>
       <div className="bg-parallaxSm relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-center md:h-[40rem] lg:bg-parallax"></div>
       <div className="bg-textLight">
-        <h1
-          className={`py-12 text-center text-8xl uppercase text-darkGray ${imbue.className}`}
-        >
-          O nas
-        </h1>
+        <MainHeading> O nas</MainHeading>
         <SectionContainer>
           <TextContainer>
             <span className="font-bold text-accentColor">Trenuj|My</span> to
