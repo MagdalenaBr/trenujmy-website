@@ -18,7 +18,7 @@ export default function RootLayout({
         className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
       >
         <Header />
-        <main className="tra h-screen w-full bg-black/50">{children}</main>
+        <main className="tra h-screen w-full bg-black/30">{children}</main>
        
       </body>
     </html>

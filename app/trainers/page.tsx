@@ -13,7 +13,7 @@ export default async function Page() {
   return (
     /*trainer card*/
     <>
-      <div className="relative z-[-20] h-[30rem] w-screen bg-sectionTrainersMain bg-cover bg-fixed bg-bottom md:h-[40rem]"></div>
+      <div className="bg-sectionTrainersMainSm relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-bottom md:h-[40rem] md:bg-sectionTrainersMain"></div>
       <div className="bg-textLight">
         <MainHeading>Kadra</MainHeading>
         <div className="pb-20">
@@ -30,7 +30,7 @@ export default async function Page() {
                   src={trainer.image}
                   alt={`trener ${trainer.name}`}
                   fill
-                  className="-z-20 object-cover grayscale transition-all hover:grayscale-0"
+                  className="-z-20 object-cover grayscale transition-all hover:scale-95 hover:grayscale-0"
                 />
                 <div className="self-end">
                   <h2
@@ -38,7 +38,7 @@ export default async function Page() {
                   >
                     {trainer.name.split(" ").at(0)}
                   </h2>
-                  <p className="px-2 text-center text-lg text-textLight">
+                  <p className="px-2 pb-4 text-center text-lg text-textLight">
                     {trainer.category}
                   </p>
                 </div>
