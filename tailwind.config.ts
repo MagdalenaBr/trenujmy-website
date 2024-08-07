@@ -25,6 +25,8 @@ const config: Config = {
         sectionPricesMain: "url(../public/prices-main-large.jpg)",
         pricesSection: "url(../public/prices-section-large.jpg)",
         pricesSectionSm: "url(../public/prices-section-small.jpg)",
+        contactMainSm: "url(../public/contact-main-small.jpg)",
+        contactMain: "url(../public/contact-main-large.jpg)",
       },
     },
   },
