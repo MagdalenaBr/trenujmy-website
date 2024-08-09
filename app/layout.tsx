@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./_components/Header";
 import { roboto } from "./fonts";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Trenuj|My",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body
         className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
       >
+        <Toaster/>
         <Header />
         <main className="tra h-screen w-full bg-black/30">{children}</main>
        
