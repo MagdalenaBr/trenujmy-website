@@ -1,5 +1,6 @@
 import { imbue } from "../fonts";
 
+
 export default function MainHeading({
   children,
 }: {
