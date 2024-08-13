@@ -9,8 +9,8 @@ export default function UserLayout({
 }>) {
   return (
     <>
-      <div className="h-24 bg-darkGray md:h-[11%]"></div>
-      <div className="bg-textLight md:h-[89%]">
+      <div className="h-24 bg-darkGray md:min-h-[11%]"></div>
+      <div className="bg-textLight md:min-h-[89%]">
         <SectionContainer>
           <div className="w-5/6">
             <h1 className={`${imbue.className} self-start py-10 text-3xl`}>

@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { ContactFormSchema } from "../_validation/schema";
+import { ContactFormSchema } from "../_validation/contactFormSchema";
 import { Resend } from "resend";
 import EmailTemplate from "../_components/EmailTemplate";
 

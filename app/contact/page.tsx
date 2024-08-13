@@ -1,5 +1,5 @@
 import Footer from "../_components/Footer";
-import Form from "../_components/Form";
+import ContactForm from "../_components/ContactForm";
 import MainHeading from "../_components/MainHeading";
 import SectionContainer from "../_components/SectionContainer";
 
@@ -11,7 +11,7 @@ export default function Page() {
         <MainHeading>Kontakt</MainHeading>
 
         <SectionContainer>
-          <Form />
+          <ContactForm />
         </SectionContainer>
         <Footer/>
       </div>
