@@ -3,6 +3,11 @@
 import { useForm } from "react-hook-form";
 import FormInput from "./FormInput";
 import ActionButton from "./ActionButton";
+import { z } from "zod";
+import { SignUpFormSchema } from "../_validation/signUpFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type SignUpFormTypes= z.infer<typeof SignUpFormSchema>
 
 export default function SignUpForm() {
   const {
@@ -10,9 +15,9 @@ export default function SignUpForm() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<SignUpFormTypes>({resolver: zodResolver(SignUpFormSchema)});
 
-  function onSubmit(data) {
+  function onSubmit(data: SignUpFormTypes) {
     console.log(data);
   }
 
