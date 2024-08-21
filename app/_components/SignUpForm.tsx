@@ -3,11 +3,13 @@
 import { useForm } from "react-hook-form";
 import FormInput from "./FormInput";
 import ActionButton from "./ActionButton";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 import { SignUpFormSchema } from "../_validation/signUpFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signupAction } from "../_lib/action";
+import toast from "react-hot-toast";
 
-type SignUpFormTypes= z.infer<typeof SignUpFormSchema>
+type SignUpFormTypes = z.infer<typeof SignUpFormSchema>;
 
 export default function SignUpForm() {
   const {
@@ -15,14 +17,24 @@ export default function SignUpForm() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpFormTypes>({resolver: zodResolver(SignUpFormSchema)});
+  } = useForm<SignUpFormTypes>({ resolver: zodResolver(SignUpFormSchema) });
 
-  function onSubmit(data: SignUpFormTypes) {
-    console.log(data);
+  async function onSubmit(data: SignUpFormTypes) {
+    const result = await signupAction(data);
+    if (result?.message) {
+      toast.error("Podany e-mail został już zarejestrowany");
+    } else {
+      toast.success("Konto zostało zarejestrowane");
+    }
+    reset();
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="m-auto flex flex-col gap-10 divide-y-2 divide-accentColor/30 border border-darkGray p-6 shadow-lg shadow-darkGray lg:w-1/2">
+    <form
+      // action={action}
+      onSubmit={handleSubmit(onSubmit)}
+      className="m-auto flex flex-col gap-10 divide-y-2 divide-accentColor/30 border border-darkGray p-6 shadow-lg shadow-darkGray lg:w-1/2"
+    >
       <div className="flex flex-col gap-8 pb-4">
         <FormInput
           inputName="email"
@@ -65,10 +77,10 @@ export default function SignUpForm() {
         </div>
         <div className="flex gap-8">
           <label className="flex w-full flex-col uppercase tracking-wider">
-            Płeć
+            Płeć*
             <select
               {...register("gender")}
-              className="w-full self-start border border-darkGray bg-transparent py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60"
+              className="w-full self-start border border-darkGray bg-transparent px-2 py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60"
             >
               <option hidden></option>
               <option className="bg-textLight">Kobieta</option>

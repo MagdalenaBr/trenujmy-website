@@ -19,7 +19,7 @@ export default function FormInput({
       <input
         type={type}
         {...register(inputName)}
-        className="w-full self-start border border-darkGray bg-transparent py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60"
+        className="w-full self-start border border-darkGray bg-transparent py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60 px-2"
       />
       {errors[inputName] && (
         <span className="pt-1 text-sm normal-case text-red-600">

@@ -34,7 +34,6 @@ export default function ContactForm() {
     }
   }
 
-  console.log(isSubmitting);
   return (
     <SectionContainer>
       <form
@@ -70,7 +69,7 @@ export default function ContactForm() {
           <textarea
             {...register("message")}
             rows={6}
-            className="w-full self-start border border-darkGray bg-transparent py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60"
+            className="w-full self-start border border-darkGray bg-transparent px-2 py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60"
           />
           {errors.message && (
             <span className="pt-1 text-sm normal-case text-red-600">

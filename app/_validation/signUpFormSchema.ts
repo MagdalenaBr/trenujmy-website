@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const phoneRegex = /^\d{9}$/;
+
 export const SignUpFormSchema = z
   .object({
     firstName: z
@@ -28,7 +30,7 @@ export const SignUpFormSchema = z
       .min(9, { message: "Podany numer telefonu jest za krótki" })
       .max(9, {
         message: "Podany numer telefonu jest nieprawidłowy. Za dużo cyfr",
-      }),
+      }).regex(phoneRegex, 'Błędny numer telefonu. Przykładowy numer telefonu: 123456789. Wprowadzony numer musi być zarejestrowany w Polsce.'),
     gender: z.enum(["Kobieta", "Mężczyzna", "Inna"], {
       message: "Wybierz płeć",
     }),

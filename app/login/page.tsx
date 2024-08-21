@@ -7,7 +7,7 @@ export default function Page() {
       <div className="h-24 bg-darkGray md:min-h-[11%]"></div>
       <div className="bg-textLight md:min-h-[89%]">
         <h1
-          className={`py-12 text-center text-3xl uppercase text-darkGray ${imbue.className}`}
+          className={`py-12 text-center text-4xl uppercase text-darkGray ${imbue.className}`}
         >
           Zaloguj się
         </h1>

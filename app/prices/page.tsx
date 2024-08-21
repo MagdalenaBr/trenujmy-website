@@ -8,7 +8,6 @@ import { getGymMembershipPrices } from "../_lib/data";
 
 export default async function Page() {
   const gymMembershipPrices = await getGymMembershipPrices();
-  console.log(gymMembershipPrices);
   return (
     <>
       <div className="relative z-[-20] h-[30rem] w-screen bg-sectionPricesMainSm bg-cover bg-fixed bg-top md:h-[40rem] md:bg-sectionPricesMain"></div>

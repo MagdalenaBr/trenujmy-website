@@ -11,7 +11,17 @@ export async function getGymMembershipPrices() {
   const { data: gymMembershipPrices, error } = await supabase
     .from("gymMembership")
     .select("*");
-  if (error) throw new Error("Wystąpił błąd podczas pobieraaania danych na temat karnetów.");
+  if (error)
+    throw new Error(
+      "Wystąpił błąd podczas pobieraaania danych na temat karnetów.",
+    );
 
   return gymMembershipPrices;
 }
+
+// export async function addMember(memberData) {
+//   const { data, error } = await supabase
+//     .from("members")
+//     .insert([memberData])
+//     .select();
+// }

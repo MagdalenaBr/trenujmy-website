@@ -6,6 +6,7 @@ import ActionButton from "./ActionButton";
 import { z } from "zod";
 import { LoginSchema } from "../_validation/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { loginAction } from "../_lib/action";
 
 type LoginFormTypes = z.infer<typeof LoginSchema>;
 
@@ -18,7 +19,8 @@ export default function LoginForm() {
   } = useForm<LoginFormTypes>({ resolver: zodResolver(LoginSchema) });
 
   function onSubmit(data: LoginFormTypes) {
-    console.log(data);
+    loginAction(data);
+    reset();
   }
 
   return (
