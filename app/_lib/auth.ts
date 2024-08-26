@@ -1,68 +1,85 @@
-import { sql } from "@vercel/postgres";
-import { error } from "console";
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import email from "next-auth/providers/email";
-import toast from "react-hot-toast";
-import { ZodError } from "zod";
+// import { sql } from "@vercel/postgres";
+// import { error } from "console";
+// import NextAuth from "next-auth";
+// import Credentials from "next-auth/providers/credentials";
+// import email from "next-auth/providers/email";
+// import toast from "react-hot-toast";
+// import { ZodError } from "zod";
+// import bcrypt, { compare } from "bcryptjs";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    // Credentials({
-    //   id: 'login',
-    //   credentials: {
-    //     email: {},
-    //     password: {},
-    //   },
-    //   async authorize(credentials, request) {
-    // let user = null
+// export const { handlers, signIn, signOut, auth } = NextAuth({
+//   providers: [
+//     Credentials({
+//       credentials: {
+//         email: {},
+//         password: {},
+//       },
+//       async authorize(credentials, request) {
+//         const password = credentials.password as string;
+//         try {
+//           const hashedPassword = await bcrypt.hash(
+//             credentials.password as string,
+//             10,
+//           );
+//           const response =
+//             await sql`SELECT * FROM users WHERE email=${credentials?.email as string}`;
+//           let user = response.rows[0];
 
-    // if (!user) {
-    //   throw new Error("Użytkownik nie został znaleziony")
-    // }
+//           const comaparePassword = await bcrypt.compare(user.password, password).then(isMatch=> {
+//             if(isMatch) {
+//               console.log('Hasła się zgadzają.')
+//             }
+//             else {
+//               throw new Error('Hasło nie zgadza się.')
+//             };
+//           })
 
-    // return user
-    //   },
-    // }),
 
-    Credentials({
-      id: "signup",
-      credentials: {
-        email: {},
-        password: {},
-      },
-      async authorize(credentials, request) {
-        // console.log(credentials);
+//           console.log(comaparePassword);
 
-        //sprawdzić czy uzytkownik jest już zalogowonay w bazie danych
+//           // if (!comaparePassword) throw new Error("Błędne hasło.");
+//           // if(user.password !== password) throw new Error("Błędne hasło.");
 
-        // try {
-        //   const response =
-        //     await sql`SELECT * FROM users WHERE email=${credentials?.email as string}`;
-        //   let user = response.rows[0];
-        //   console.log(user);
+//           if (!user) {
+//             throw new Error("Użytkownik nie został znaleziony.");
+//           }
+//           console.log(user);
+//           return user;
+//         } catch (error) {
+//           return null;
+//         }
 
-        //   // jeżeli tak to zwrócić informację że dany użytkownik istnieje
+//         // console.log(credentials);
 
-        //   if (!!user) {
-        //     // toast.error("Podany e-mail został już zarejestrowany.");
-        //     throw new Error("Podany e-mail został już zarejestrowany");
-        //   }
-        //   if (!user) {
-        //     const addResponse =
-        //       await sql`INSERT INTO users (email, password) VALUES (${credentials.email as string}, ${credentials.password as string})`;
+//         //sprawdzić czy uzytkownik jest już zalogowonay w bazie danych
 
-        //     /// dodać użytkownika do supabase
+//         // try {
+//         //   const response =
+//         //     await sql`SELECT * FROM users WHERE email=${credentials?.email as string}`;
+//         //   let user = response.rows[0];
+//         //   console.log(user);
 
-        //     /// pobrać dane z supabase
-        //   }
-        //   return user;
-        // } catch {
-        //   if (error instanceof ZodError) return null;
-        // }
+//         //   // jeżeli tak to zwrócić informację że dany użytkownik istnieje
 
-        // jeżeli nie to dodać użytkownika do bazy danych vercel i do bazy danych w supabase
-      },
-    }),
-  ],
-});
+//         //   if (!!user) {
+//         //     // toast.error("Podany e-mail został już zarejestrowany.");
+//         //     throw new Error("Podany e-mail został już zarejestrowany");
+//         //   }
+//         //   if (!user) {
+//         //     const addResponse =
+//         //       await sql`INSERT INTO users (email, password) VALUES (${credentials.email as string}, ${credentials.password as string})`;
+
+//         //     /// dodać użytkownika do supabase
+
+//         //     /// pobrać dane z supabase
+//         //   }
+//         //   return user;
+//         // } catch {
+//         //   if (error instanceof ZodError) return null;
+//         // }
+
+//         // jeżeli nie to dodać użytkownika do bazy danych vercel i do bazy danych w supabase
+//       },
+//     }),
+//   ],
+// });

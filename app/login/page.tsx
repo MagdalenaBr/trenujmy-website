@@ -1,7 +1,12 @@
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import LoginForm from "../_components/LoginForm";
 import { imbue } from "../fonts";
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession();
+  if (session) redirect("/user/profile");
+
   return (
     <>
       <div className="h-24 bg-darkGray md:min-h-[11%]"></div>

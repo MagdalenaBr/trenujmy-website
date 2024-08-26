@@ -1,16 +1,20 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
-import FormInput from "./FormInput";
-import ActionButton from "./ActionButton";
+import toast from "react-hot-toast";
 import { z } from "zod";
 import { LoginSchema } from "../_validation/loginSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginAction } from "../_lib/action";
+import ActionButton from "./ActionButton";
+import FormInput from "./FormInput";
 
 type LoginFormTypes = z.infer<typeof LoginSchema>;
 
 export default function LoginForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,8 +22,19 @@ export default function LoginForm() {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormTypes>({ resolver: zodResolver(LoginSchema) });
 
-  function onSubmit(data: LoginFormTypes) {
-    loginAction(data);
+  async function onSubmit(
+    data: LoginFormTypes,
+    e: BaseSyntheticEvent | undefined,
+  ) {
+    e?.preventDefault();
+    const response = await signIn("credentials", { ...data, redirect: false });
+
+    if (response?.error) {
+      toast.error(response.error);
+    }
+    if (!response?.error) {
+      router.push("/user/profile");
+    }
     reset();
   }
 
