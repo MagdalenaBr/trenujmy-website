@@ -1,6 +1,10 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
+import { getServerSession } from "next-auth";
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession();
+
+  
   return (
     <div className="flex w-full px-6">
       <div className="w-1/3">

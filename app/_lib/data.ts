@@ -1,5 +1,15 @@
 import { supabase } from "./supabase";
 
+interface MemberDataType {
+  id: number;
+  created_at: string;
+  name: string;
+  email: string;
+  phone: string;
+  gender: string;
+  city: string;
+}
+
 export async function getTrainers() {
   const { data: trainers, error } = await supabase.from("trainers").select("*");
 
@@ -19,9 +29,12 @@ export async function getGymMembershipPrices() {
   return gymMembershipPrices;
 }
 
-// export async function addMember(memberData) {
-//   const { data, error } = await supabase
-//     .from("members")
-//     .insert([memberData])
-//     .select();
-// }
+export async function getMemberData(email: string): Promise<MemberDataType[]> {
+  const { data: members, error } = await supabase
+    .from("members")
+    .select("*")
+    .eq("email", email);
+
+  if (error) throw new Error("Użytkownik nie został znaleziony.");
+  return members;
+}
