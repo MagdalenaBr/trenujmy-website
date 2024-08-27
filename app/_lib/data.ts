@@ -1,14 +1,5 @@
 import { supabase } from "./supabase";
-
-interface MemberDataType {
-  id: number;
-  created_at: string;
-  name: string;
-  email: string;
-  phone: string;
-  gender: string;
-  city: string;
-}
+import { BookingsDataType, MemberDataType } from "./types";
 
 export async function getTrainers() {
   const { data: trainers, error } = await supabase.from("trainers").select("*");
@@ -37,4 +28,16 @@ export async function getMemberData(email: string): Promise<MemberDataType[]> {
 
   if (error) throw new Error("Użytkownik nie został znaleziony.");
   return members;
+}
+
+export async function getMemberBookings(
+  memberId: number,
+): Promise<BookingsDataType[]> {
+  const { data: bookings, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .eq("memberId", memberId);
+
+  if (error) throw new Error("Dane odnośnie rezerwacji nie zostały pobrane.");
+  return bookings;
 }
