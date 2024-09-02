@@ -1,13 +1,15 @@
-import { getServerSession } from "next-auth";
+import Link from "next/link";
 import SectionContainer from "../_components/SectionContainer";
-import UserNav from "../_components/UserNav";
 import { imbue } from "../fonts";
+import { getServerSession } from "next-auth";
+import UserNav from "../_components/UserNav";
 
 export default async function UserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const session = await getServerSession();
   return (
     <>
@@ -16,10 +18,7 @@ export default async function UserLayout({
         <SectionContainer>
           <div className="w-5/6">
             <h1 className={`${imbue.className} self-start py-10 text-3xl`}>
-              Witaj,{" "}
-              {session?.user?.name &&
-                session?.user?.name?.split(" ")[0][0].toUpperCase() +
-                  session?.user?.name?.split(" ")[0].substring(1)}
+              Witaj, {session?.user?.name && session?.user?.name?.split(' ')[0][0].toUpperCase() + session?.user?.name?.split(' ')[0].substring(1)}
             </h1>
             <UserNav>{children}</UserNav>
           </div>
