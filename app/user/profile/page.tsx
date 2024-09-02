@@ -7,12 +7,12 @@ export default async function Page() {
   const session = await getServerSession();
   const memberData = await getMemberData(session?.user?.email as string);
   const { id, name, email, phone, city } = memberData[0];
+  const memberBookings= await getMemberBookings(id)
+  
   const memberName =  name.split(' ').map(word => {
     return word[0].toUpperCase() + word.substring(1)
   }).join(' ')
   
-  const memberBookings= await getMemberBookings(id)
-
   return (
     <div className="flex w-full px-6 gap-24">
       <div className="w-1/4 pt-10">

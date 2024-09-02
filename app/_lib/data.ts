@@ -35,8 +35,8 @@ export async function getMemberBookings(
 ): Promise<BookingsDataType[]> {
   const { data: bookings, error } = await supabase
     .from("bookings")
-    .select("*")
-    .eq("memberId", memberId);
+    .select("*, trainers(name)")
+    .eq("memberId", memberId).order('date', {ascending: false});
 
   if (error) throw new Error("Dane odnośnie rezerwacji nie zostały pobrane.");
   return bookings;
