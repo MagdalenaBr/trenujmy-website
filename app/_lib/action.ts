@@ -2,15 +2,15 @@
 
 import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { Resend } from "resend";
 import { z } from "zod";
 import EmailTemplate from "../_components/EmailTemplate";
 import { ContactFormSchema } from "../_validation/contactFormSchema";
-import { LoginSchema } from "../_validation/loginSchema";
 import { SignUpFormSchema } from "../_validation/signUpFormSchema";
 import { supabase } from "./supabase";
-import { revalidatePath } from "next/cache";
+import { getServerSession } from "next-auth";
 
 type ContactFormTypes = z.infer<typeof ContactFormSchema>;
 type SignupFormTypes = z.infer<typeof SignUpFormSchema>;
@@ -67,21 +67,43 @@ export async function signupAction(formData: SignupFormTypes) {
   } catch (error: any) {
     return { message: error.message };
   }
-
   redirect("/login");
 }
 
 export async function cancelBookingAction(bookingId: number) {
+  const session = await getServerSession();
+  if (!session) throw new Error("Musisz być zalogowany!");
+  
   const { error } = await supabase
     .from("bookings")
     .update({ status: "anulowana" })
     .eq("id", bookingId)
     .select();
-
   if (error)
     throw new Error(
       "Wystąpił błąd podczas anulowania rezerwacji. Spróbuj poonownie.",
     );
-
   revalidatePath("/user/bookings");
+}
+
+export async function editMemberData(
+  memberId: number,
+  data: { firstName: string; lastName: string; phone: string; city: string },
+) {
+  const session = await getServerSession();
+  if (!session) throw new Error("Musisz być zalogowany!");
+
+  const { firstName, lastName, phone, city } = data;
+  const name = `${firstName} ${lastName}`
+
+  const newData = {name, phone, city};
+
+  const { error } = await supabase
+    .from("members")
+    .update(newData)
+    .eq("id", memberId)
+    .select();
+
+    if(error) throw new Error('Wystąpił problem ze zmianą danych.')
+    redirect("/user/profile");
 }

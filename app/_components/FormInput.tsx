@@ -1,3 +1,4 @@
+import { HTMLAttributes } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 export default function FormInput({
@@ -6,7 +7,8 @@ export default function FormInput({
   errors,
   inputName,
   type = "text",
-  isEditingMode
+  isEditingMode,
+  defaultValue
 }: {
   label: string;
   register: UseFormRegister<any>;
@@ -14,12 +16,14 @@ export default function FormInput({
   errors: FieldErrors<any>;
   inputName: string;
   isEditingMode?: boolean;
+  defaultValue?: string | number
 }) {
   return (
     <label className="flex w-full flex-col uppercase tracking-wider">
       {inputName === 'lastNameContact' || isEditingMode ? label : `${label}*`}
       <input
         type={type}
+        defaultValue={defaultValue}
         {...register(inputName)}
         className="w-full self-start border border-darkGray bg-transparent py-1 shadow-sm shadow-darkGray outline-accentColor hover:border-accentColor/60 px-2"
       />
