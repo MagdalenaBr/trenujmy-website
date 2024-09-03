@@ -1,13 +1,14 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import FormInput from "./FormInput";
-import ActionButton from "./ActionButton";
-import { z } from "zod";
-import { EditDataFormSchema } from "../_validation/editDataFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
+import { editMemberDataAction } from "../_lib/action";
 import { MemberDataType } from "../_lib/types";
-import { editMemberData } from "../_lib/action";
+import { EditDataFormSchema } from "../_validation/editDataFormSchema";
+import ActionButton from "./ActionButton";
+import FormInput from "./FormInput";
 
 type EditDataTypes = z.infer<typeof EditDataFormSchema>;
 
@@ -17,7 +18,6 @@ export default function EditMemberDataForm({
   memberData: MemberDataType;
 }) {
   const { id, name, phone, city } = memberData;
-
   const {
     register,
     handleSubmit,
@@ -26,10 +26,12 @@ export default function EditMemberDataForm({
   } = useForm<EditDataTypes>({ resolver: zodResolver(EditDataFormSchema) });
 
   async function onSubmit(data: EditDataTypes) {
-    console.log(data);
-
-    const result = await editMemberData(id, data);
-
+    const result = await editMemberDataAction(id, data);
+    if (result?.message) {
+      toast.error(result?.message);
+    } else {
+      toast.success("Dane zostały zmienione.");
+    }
     reset();
   }
 

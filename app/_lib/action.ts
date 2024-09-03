@@ -71,39 +71,46 @@ export async function signupAction(formData: SignupFormTypes) {
 }
 
 export async function cancelBookingAction(bookingId: number) {
-  const session = await getServerSession();
-  if (!session) throw new Error("Musisz być zalogowany!");
-  
-  const { error } = await supabase
-    .from("bookings")
-    .update({ status: "anulowana" })
-    .eq("id", bookingId)
-    .select();
-  if (error)
-    throw new Error(
-      "Wystąpił błąd podczas anulowania rezerwacji. Spróbuj poonownie.",
-    );
-  revalidatePath("/user/bookings");
+  try {
+    const session = await getServerSession();
+    if (!session) throw new Error("Musisz być zalogowany!");
+
+    const { error } = await supabase
+      .from("bookings")
+      .update({ status: "anulowana" })
+      .eq("id", bookingId)
+      .select();
+    if (error)
+      throw new Error(
+        "Wystąpił błąd podczas anulowania rezerwacji. Spróbuj ponownie.",
+      );
+      revalidatePath("/user/bookings");
+    } catch (error: any) {
+      return { message: error.message };
+    }
 }
 
-export async function editMemberData(
+export async function editMemberDataAction(
   memberId: number,
   data: { firstName: string; lastName: string; phone: string; city: string },
 ) {
-  const session = await getServerSession();
-  if (!session) throw new Error("Musisz być zalogowany!");
+  try {
+    const session = await getServerSession();
+    if (!session) throw new Error("Musisz być zalogowany!");
 
-  const { firstName, lastName, phone, city } = data;
-  const name = `${firstName} ${lastName}`
+    const { firstName, lastName, phone, city } = data;
+    const name = `${firstName} ${lastName}`;
+    const newData = { name, phone, city };
 
-  const newData = {name, phone, city};
+    const { error } = await supabase
+      .from("members")
+      .update(newData)
+      .eq("id", memberId)
+      .select();
 
-  const { error } = await supabase
-    .from("members")
-    .update(newData)
-    .eq("id", memberId)
-    .select();
-
-    if(error) throw new Error('Wystąpił problem ze zmianą danych.')
+    if (error) throw new Error("Wystąpił problem ze zmianą danych.");
     redirect("/user/profile");
+  } catch (error: any) {
+    return { message: error.message };
+  }
 }
