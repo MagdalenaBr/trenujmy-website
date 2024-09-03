@@ -20,6 +20,7 @@ export default async function UserLayout({
             <h1 className={`${imbue.className} self-start py-10 text-3xl`}>
               Witaj, {session?.user?.name && session?.user?.name?.split(' ')[0][0].toUpperCase() + session?.user?.name?.split(' ')[0].substring(1)}
             </h1>
+            
             <UserNav>{children}</UserNav>
           </div>
         </SectionContainer>

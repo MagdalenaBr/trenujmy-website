@@ -20,6 +20,7 @@ export default function RootLayout({
       >
         <Toaster/>
         <Header />
+        
         <main className="tra h-screen w-full bg-black/30">{children}</main>
        
       </body>

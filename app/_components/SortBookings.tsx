@@ -21,7 +21,7 @@ export default function SortBookings() {
     <select
       onChange={(e) => handleSelect(e.target.value)}
       defaultValue={searchParams.get("status")?.toString()}
-      className="mb-4 w-48 self-end border border-darkGray bg-transparent shadow-sm shadow-darkGray"
+      className=" w-48 self-end border-b border-r border-darkGray bg-transparent shadow-sm shadow-darkGray"
     >
       <option value="wszystkie">wszystkie</option>
       <option value="niepotwierdzona">niepotwierdzone</option>

@@ -6,16 +6,18 @@ export default function FormInput({
   errors,
   inputName,
   type = "text",
+  isEditingMode
 }: {
   label: string;
   register: UseFormRegister<any>;
   type?: string;
   errors: FieldErrors<any>;
   inputName: string;
+  isEditingMode?: boolean;
 }) {
   return (
     <label className="flex w-full flex-col uppercase tracking-wider">
-      {inputName === 'lastNameContact' ? label : `${label}*`}
+      {inputName === 'lastNameContact' || isEditingMode ? label : `${label}*`}
       <input
         type={type}
         {...register(inputName)}

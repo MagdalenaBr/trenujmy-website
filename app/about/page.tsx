@@ -8,8 +8,11 @@ import MainHeading from "../_components/MainHeading";
 import SectionContainer from "../_components/SectionContainer";
 import SportAactivityContainer from "../_components/SportActivityContainer";
 import TextContainer from "../_components/TextContainer";
+import Link from "next/link";
+import { getServerSession } from "next-auth";
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession();
   const sportActivities = [
     {
       label: "Aerobik",
@@ -51,7 +54,7 @@ export default function Page() {
 
   return (
     <>
-      <div className="bg-parallaxSm relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-center md:h-[40rem] lg:bg-parallax"></div>
+      <div className="relative z-[-20] h-[30rem] w-screen bg-parallaxSm bg-cover bg-fixed bg-center md:h-[40rem] lg:bg-parallax"></div>
       <div className="bg-textLight">
         <MainHeading> O nas</MainHeading>
         <SectionContainer>
@@ -85,7 +88,7 @@ export default function Page() {
             </SportAactivityContainer>
           ))}
         </SectionContainer>
-        <div className="bg-sectionAboutImgSm relative h-[35rem] bg-cover bg-fixed md:h-[50rem] md:bg-sectionAboutImg"></div>
+        <div className="relative h-[35rem] bg-sectionAboutImgSm bg-cover bg-fixed md:h-[50rem] md:bg-sectionAboutImg"></div>
         <div className="bg-textLight pb-20 pt-20">
           <SectionContainer>
             <div className="flex w-full flex-col justify-around gap-4 md:flex-row">
@@ -97,9 +100,12 @@ export default function Page() {
                   który będzie dostosowany do Twoich potrzeb i celów.
                 </TextContainer>
               </div>
-              <button className="self-center border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg">
+              <Link
+                href="/trainers"
+                className="self-center border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg"
+              >
                 Kadra
-              </button>
+              </Link>
             </div>
             <div className="flex w-full flex-col justify-around gap-4 md:flex-row">
               <div className="max-w-[40rem]">
@@ -110,9 +116,12 @@ export default function Page() {
                   i dobre samopoczucie są dla nas najważniejsze.
                 </TextContainer>
               </div>
-              <button className="self-center border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg">
+              <Link
+                href={session ? "/user/bookings" : "/login"}
+                className="self-center border-2 border-darkGray px-8 py-2 font-semibold uppercase tracking-widest shadow-md shadow-darkGray transition-all hover:scale-110 lg:text-lg"
+              >
                 Dołącz
-              </button>
+              </Link>
             </div>
           </SectionContainer>
         </div>
