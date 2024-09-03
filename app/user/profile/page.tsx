@@ -1,23 +1,35 @@
-import SpinnerSmall from "@/app/_components/SpinnerSmall";
 import UserPieChart from "@/app/_components/UserPieChart";
-import { getMemberBookings, getMemberData } from "@/app/_lib/data";
+import {
+  getMemberBookings,
+  getMemberData,
+  getMemberPurchasedMemberships,
+} from "@/app/_lib/data";
+import { TODAY_DAY, TODAY_DAY_END } from "@/app/_utils/constants";
 import { PencilIcon } from "@heroicons/react/24/outline";
+import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export default async function Page() {
   const session = await getServerSession();
   const memberData = await getMemberData(session?.user?.email as string);
   const { id, name, email, phone, city } = memberData[0];
   const memberBookings = await getMemberBookings(id);
-
   const memberName = name
     .split(" ")
     .map((word) => {
       return word[0].toUpperCase() + word.substring(1);
     })
     .join(" ");
+
+  const memberPurchasedMemberships = await getMemberPurchasedMemberships(id);
+
+  const activeMembership = memberPurchasedMemberships?.filter(
+    (membership) =>
+      TODAY_DAY >= membership.startDay &&
+      TODAY_DAY_END <= membership.endDay &&
+      membership.isValid,
+  )[0];
 
   return (
     <div className="flex w-full gap-24 px-6">
@@ -49,8 +61,14 @@ export default async function Page() {
           <div className="flex w-full justify-between py-2">
             <h3 className="font-semibold uppercase">Aktywny karnet</h3>
             <div className="text-end">
-              <p>3 miesiące</p>
-              <p>20.06.2024 - 20.09.2024</p>
+              {activeMembership ? (
+                <>
+                  <p>{activeMembership?.gymMembership.gymMembershipName}</p>
+                  <p>{`${format(parseISO(activeMembership?.startDay), "dd.MM.yyyy")} - ${format(parseISO(activeMembership?.endDay), "dd.MM.yyyy")}`}</p>
+                </>
+              ) : (
+                <p>Brak aktywnego karnetu</p>
+              )}
             </div>
           </div>
         </div>

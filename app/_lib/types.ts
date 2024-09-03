@@ -19,3 +19,15 @@ export interface BookingsDataType {
     name: string;
   };
 }
+
+export interface PurchasedMembershipsTypes {
+  id: number;
+  created_at: string;
+  startDay: string;
+  endDay: string;
+  memberId: number;
+  gymMembershipId: number;
+  isValid: boolean;
+  price: number;
+  gymMembership: { gymMembershipName: string };
+}

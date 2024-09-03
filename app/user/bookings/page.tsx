@@ -28,11 +28,17 @@ export default async function Page({
         </div>
         <SortBookings />
       </div>
-        <div className="divide-y divide-lightGray">
-          {memberBookings.map((booking) => (
+      <div className="divide-y divide-lightGray">
+        {memberBookings.length > 0 ? (
+          memberBookings.map((booking) => (
             <Booking key={booking.id} booking={booking} />
-          ))}
-        </div>
+          ))
+        ) : (
+          <p className="text-center text-darkGray">
+            Brak dostępnych rezerwacji.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

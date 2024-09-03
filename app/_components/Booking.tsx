@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { format, formatISO, isBefore, parseISO } from "date-fns";
 import { BookingsDataType } from "../_lib/types";
 import CancelButton from "./CancelButton";
+import { TODAY_DAY } from "../_utils/constants";
 
 export default function Booking({ booking }: { booking: BookingsDataType }) {
   const {
@@ -11,8 +12,8 @@ export default function Booking({ booking }: { booking: BookingsDataType }) {
     status,
   } = booking;
   const day = format(parseISO(date.split("T")[0]), "dd.MM.yyyy");
-  const todayDay = formatISO(new Date());
-  const dayIsBeforeToday = isBefore(todayDay, date);
+  // const todayDay = formatISO(new Date());
+  const dayIsBeforeToday = isBefore(TODAY_DAY, date);
   
   return (
     <div className="grid grid-cols-4 items-center px-2 py-2">

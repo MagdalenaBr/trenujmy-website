@@ -70,8 +70,8 @@ export default function UserPieChart({
               <Legend
                 height={36}
                 layout="vertical"
-                align="right"
-                verticalAlign="middle"
+                align="center"
+                verticalAlign="bottom"
                 iconType="circle"
               />
               <Pie
