@@ -84,10 +84,10 @@ export async function cancelBookingAction(bookingId: number) {
       throw new Error(
         "Wystąpił błąd podczas anulowania rezerwacji. Spróbuj ponownie.",
       );
-      revalidatePath("/user/bookings");
-    } catch (error: any) {
-      return { message: error.message };
-    }
+    revalidatePath("/user/bookings");
+  } catch (error: any) {
+    return { message: error.message };
+  }
 }
 
 export async function editMemberDataAction(
@@ -109,8 +109,8 @@ export async function editMemberDataAction(
       .select();
 
     if (error) throw new Error("Wystąpił problem ze zmianą danych.");
-    redirect("/user/profile");
   } catch (error: any) {
     return { message: error.message };
   }
+  redirect("/user/profile");
 }

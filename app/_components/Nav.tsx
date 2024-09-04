@@ -4,7 +4,6 @@ import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import LoginButton from "./LoginButton";
 
 function Nav() {
   const pathname = usePathname();
