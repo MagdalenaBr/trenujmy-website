@@ -34,6 +34,7 @@ export default function LoginForm() {
     }
     if (!response?.error) {
       router.push("/user/profile");
+      router.refresh()
     }
     reset();
   }

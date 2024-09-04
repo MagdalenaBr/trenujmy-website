@@ -46,7 +46,7 @@ function Nav() {
         {showMobileNav === false ? <Bars3BottomRightIcon /> : <XMarkIcon />}
       </button>
       <nav
-        className={`fixed bottom-0 right-0 top-0 z-[999] flex w-3/4 flex-col gap-5  bg-black/60 py-16 backdrop-blur-md md:w-1/2 lg:relative lg:w-3/4 lg:translate-x-0 lg:flex-row lg:justify-between lg:bg-transparent lg:py-0 lg:backdrop-blur-none ${
+        className={`fixed bottom-0 right-0 top-0 z-[999] flex w-3/4 flex-col gap-5 bg-black/60 py-16 backdrop-blur-md md:w-1/2 lg:relative lg:translate-x-0 lg:flex-row lg:justify-between lg:bg-transparent lg:py-0 lg:backdrop-blur-none ${
           showMobileNav === true ? "translate-x-0" : "translate-x-[100%]"
         } transition-all`}
       >
@@ -64,7 +64,6 @@ function Nav() {
             </li>
           ))}
         </ul>
-        <LoginButton />
       </nav>
     </>
   );
