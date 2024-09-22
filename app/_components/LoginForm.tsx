@@ -18,7 +18,6 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormTypes>({ resolver: zodResolver(LoginSchema) });
 
@@ -36,7 +35,6 @@ export default function LoginForm() {
       router.push("/user/profile");
       router.refresh()
     }
-    reset();
   }
 
   return (

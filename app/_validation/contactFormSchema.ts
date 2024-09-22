@@ -4,7 +4,7 @@ export const ContactFormSchema = z.object({
   firstName: z
     .string({ required_error: "Podaj imię" })
     .min(1, { message: "Podaj imię" }),
-  lastName: z.string(),
+  lastNameContact: z.string(),
   email: z
     .string({ required_error: "Podaj email." })
     .min(1, { message: "Podaj email" })
