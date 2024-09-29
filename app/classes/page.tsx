@@ -1,7 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import ScheduleContainer from "../_components/ScheduleContainer";
 import SectionContainer from "../_components/SectionContainer";
-import MainHeading from "../_components/MainHeading";
-import Schedule from "../_components/Schedule";
 
 export default function Page() {
   return (
@@ -25,15 +24,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="flex">
-            <div className="mx-4 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor">
-              <ChevronLeftIcon />
-            </div>
-            <Schedule />
-            <div className="mx-4 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor">
-              <ChevronRightIcon />
-            </div>
-          </div>
+          <ScheduleContainer />
         </SectionContainer>
       </div>
     </>
