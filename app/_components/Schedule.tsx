@@ -1,17 +1,17 @@
-"use client";
-
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import {
   addDays,
   eachDayOfInterval,
+  eachHourOfInterval,
   format,
   formatISO,
   subDays,
 } from "date-fns";
-import ScheduleEvent from "./ScheduleEvent";
-import { TODAY_DAY } from "../_utils/constants";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useScheduleContext } from "../_context/ScheduleContext";
+import { TODAY_DAY } from "../_utils/constants";
+import ScheduleEvent from "./ScheduleEvent";
+import { HoursTypes } from "../_lib/types";
 
 interface ContextTypes {
   firstDay: string;
@@ -20,54 +20,45 @@ interface ContextTypes {
   setLastDay: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Schedule() {
+export default function Schedule({
+  openHours,
+}: {
+  openHours: HoursTypes | undefined;
+}) {
   const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
+
+  const todayDayArr = TODAY_DAY.split("T")[0]
+    .split("-")
+    .map((num) => Number(num));
 
   const datesArr = eachDayOfInterval({
     start: firstDay,
     end: lastDay,
   }).map((day) => format(day, "dd.MM"));
 
-  const [newDates, setNewDates] = useState(datesArr);
+  const openHour = Number(openHours?.openHour.split(":").at(0));
+  const closeHour = Number(openHours?.closeHour.split(":").at(0));
+  const hoursArr = eachHourOfInterval({
+    start: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], openHour),
+    end: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], closeHour),
+  }).map((date) => format(date, "H:mm"));
 
   function changeWeek(newWeekFirstDay: string, newWeekLastDay: string) {
-    const datesArr = eachDayOfInterval({
-      start: newWeekFirstDay,
-      end: newWeekLastDay,
-    }).map((day) => format(day, "dd.MM"));
-
     setFirstDay(newWeekFirstDay);
     setLastDay(newWeekLastDay);
-    setNewDates(datesArr);
   }
 
   function changeWeekForward() {
     const newWeekFirstDay = formatISO(addDays(firstDay, 7));
     const newWeekLastDay = formatISO(addDays(lastDay, 7));
-
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
 
   function changeWeekBackwards() {
     const newWeekFirstDay = formatISO(subDays(firstDay, 7));
     const newWeekLastDay = formatISO(subDays(lastDay, 7));
-
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
-
-  const hourArr = [
-    "8.00",
-    "9.00",
-    "10.00",
-    "11.00",
-    "12.00",
-    "13.00",
-    "14.00",
-    "15.00",
-    "16.00",
-    "17.00",
-    "18.00",
-  ];
 
   return (
     <div className="flex">
@@ -77,11 +68,10 @@ export default function Schedule() {
       >
         <ChevronLeftIcon />
       </button>
-      {/* <Schedule datesArr={newDates} /> */}
 
       <div className="flex w-full justify-between gap-10 border bg-darkGray px-4 text-xl text-textLight">
         <div className="w-full">
-          {hourArr.map((hour, index) => (
+          {hoursArr.map((hour, index) => (
             <div
               key={hour}
               className={`border-accentColor/30" flex h-[150px] justify-between gap-4 border-b ${index === 0 && "h-[180px]"}`}

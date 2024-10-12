@@ -31,3 +31,8 @@ export interface PurchasedMembershipsTypes {
   price: number;
   gymMembership: { gymMembershipName: string };
 }
+
+export interface HoursTypes {
+  openHour: string;
+  closeHour: string
+}

@@ -24,7 +24,7 @@ export default function ChangeMonth() {
       <button onClick={subMonth}>
         <ChevronLeftIcon className="w-8" />
       </button>
-      <span className="text-xl uppercase">{currMonthName}</span>
+      <p className="w-32 text-center text-xl uppercase">{currMonthName}</p>
       <button onClick={addMonth}>
         <ChevronRightIcon className="w-8" />
       </button>

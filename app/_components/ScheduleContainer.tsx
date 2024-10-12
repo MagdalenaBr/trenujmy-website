@@ -1,12 +1,13 @@
 "use client";
 
 import ScheduleContextProvider from "../_context/ScheduleContext";
+import { HoursTypes } from "../_lib/types";
 import ChangeMonth from "./ChangeMonth";
 import ResetButton from "./ResetButton";
 import Schedule from "./Schedule";
 import SectionContainer from "./SectionContainer";
 
-export default function ScheduleContainer() {
+export default function ScheduleContainer({openHours}: {openHours: HoursTypes | undefined}) {
   return (
     <SectionContainer>
       <ScheduleContextProvider>
@@ -19,7 +20,7 @@ export default function ScheduleContainer() {
             </div>
           </div>
         </div>
-        <Schedule />
+        <Schedule openHours={openHours} />
       </ScheduleContextProvider>
     </SectionContainer>
   );

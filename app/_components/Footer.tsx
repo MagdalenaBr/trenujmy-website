@@ -1,11 +1,12 @@
-import { MegaphoneIcon } from "@heroicons/react/16/solid";
 import {
   DevicePhoneMobileIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
 import Logo from "./Logo";
+import { getOpenHours } from "../_lib/data";
 
-export default function Footer() {
+export default async function Footer() {
+  const { openHour, closeHour } = (await getOpenHours()).at(0);
   return (
     <footer className="flex w-full flex-col items-center justify-center bg-darkGray pt-10 text-textLight">
       <div className="flex w-11/12 max-w-[1300px] flex-col items-center gap-6 pb-10 md:flex-row md:justify-between">
@@ -30,7 +31,9 @@ export default function Footer() {
             Godziny otwarcia
           </h3>
           <p className="pb-2">Poniedziałek - Sobota</p>
-          <p className="pb-2">8:00 - 20:00</p>
+          <p className="pb-2">
+            {openHour.slice(0, -3)} - {closeHour.slice(0, -3)}
+          </p>
         </div>
         <div className="w-[12rem]">
           <h3 className="pb-4 text-center uppercase text-accentColor/70">

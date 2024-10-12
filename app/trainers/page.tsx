@@ -9,7 +9,6 @@ import Footer from "../_components/Footer";
 
 export default async function Page() {
   const trainers = await getTrainers();
-
   return (
     /*trainer card*/
     <>

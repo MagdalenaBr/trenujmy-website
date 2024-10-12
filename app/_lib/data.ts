@@ -1,6 +1,7 @@
 import { supabase } from "./supabase";
 import {
   BookingsDataType,
+  HoursTypes,
   MemberDataType,
   PurchasedMembershipsTypes,
 } from "./types";
@@ -55,7 +56,7 @@ export async function getMemberBookings(
 export async function getMemberPurchasedMemberships(
   memberId: number,
 ): Promise<PurchasedMembershipsTypes[] | null> {
-  let { data: purchasedMemberships, error } = await supabase
+  const { data: purchasedMemberships, error } = await supabase
     .from("purchasedMemberships")
     .select("*,  gymMembership(gymMembershipName)")
     .eq("memberId", memberId);
@@ -63,4 +64,15 @@ export async function getMemberPurchasedMemberships(
   if (error)
     throw new Error(`Dane dotyczące aktywnego karnetu nie zostały pobrane.`);
   return purchasedMemberships
+}
+
+export async function getOpenHours(): Promise<HoursTypes[]> {
+  
+const { data: openHours, error } = await supabase
+.from('openHours')
+.select('*')
+
+if(error) throw new Error(`Wystąpił problem z wyświetleniem godzin otwarcia.`)
+
+return openHours
 }

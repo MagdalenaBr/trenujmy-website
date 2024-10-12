@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { LAST_DAY_IN_WEEK, TODAY_DAY } from "../_utils/constants";
 
-
 interface ContextTypes {
   firstDay: string;
   setFirstDay: React.Dispatch<React.SetStateAction<string>>;
