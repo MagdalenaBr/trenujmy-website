@@ -36,3 +36,15 @@ export interface HoursTypes {
   openHour: string;
   closeHour: string
 }
+
+export interface ScheduleTypes {
+  id: number;
+  created_at: string;
+  name: string;
+  trainerId: number;
+  numOfPlaces: number;
+  date: string;
+  trainers: {
+    name: string;
+  }
+}

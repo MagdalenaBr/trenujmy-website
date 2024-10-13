@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { Toaster } from "react-hot-toast";
 import Header from "./_components/Header";
 import { roboto } from "./fonts";
-import { Toaster } from "react-hot-toast";
+import "./globals.css";
+import { ReactQueryProvider } from "./_components/QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Trenuj|My",
@@ -14,16 +15,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl">
-      <body
-        className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
-      >
-        <Toaster/>
-        <Header />
-        
-        <main className="tra h-screen w-full bg-black/30">{children}</main>
-       
-      </body>
-    </html>
+    <ReactQueryProvider>
+      <html lang="pl">
+        <body
+          className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
+        >
+          <Toaster />
+          <Header />
+
+          <main className="tra h-screen w-full bg-black/30">{children}</main>
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }

@@ -4,6 +4,7 @@ import {
   HoursTypes,
   MemberDataType,
   PurchasedMembershipsTypes,
+  ScheduleTypes,
 } from "./types";
 
 export async function getTrainers() {
@@ -63,16 +64,26 @@ export async function getMemberPurchasedMemberships(
 
   if (error)
     throw new Error(`Dane dotyczące aktywnego karnetu nie zostały pobrane.`);
-  return purchasedMemberships
+  return purchasedMemberships;
 }
 
 export async function getOpenHours(): Promise<HoursTypes[]> {
-  
-const { data: openHours, error } = await supabase
-.from('openHours')
-.select('*')
+  const { data: openHours, error } = await supabase
+    .from("openHours")
+    .select("*");
 
-if(error) throw new Error(`Wystąpił problem z wyświetleniem godzin otwarcia.`)
+  if (error)
+    throw new Error(`Wystąpił problem z wyświetleniem godzin otwarcia.`);
 
-return openHours
+  return openHours;
+}
+
+export async function getSchedule(): Promise<ScheduleTypes[]> {
+  const { data: schedule, error } = await supabase
+    .from("schedule")
+    .select("*, trainers(name)");
+
+  if (error) throw new Error("Wystąpił błąd podczas pobierania grafiku zajęć.");
+
+  return schedule;
 }

@@ -1,14 +1,15 @@
 import ScheduleContainer from "../_components/ScheduleContainer";
-import { getOpenHours } from "../_lib/data";
+import { getOpenHours, getSchedule } from "../_lib/data";
 
 export default async function Page() {
   const openHours = (await getOpenHours()).at(0);
-  console.log(openHours);
+  const schedule = await getSchedule();
+
   return (
     <>
       <div className="h-24 bg-darkGray md:min-h-[11%]"></div>
       <div className="bg-textLight md:min-h-[89%]">
-        <ScheduleContainer openHours={openHours} />
+        <ScheduleContainer openHours={openHours} schedule={schedule} />
       </div>
     </>
   );

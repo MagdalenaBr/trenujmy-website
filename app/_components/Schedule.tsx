@@ -5,13 +5,15 @@ import {
   eachHourOfInterval,
   format,
   formatISO,
+  isSameDay,
+  isSameHour,
   subDays,
 } from "date-fns";
 import { useState } from "react";
 import { useScheduleContext } from "../_context/ScheduleContext";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
-import { HoursTypes } from "../_lib/types";
+import { HoursTypes, ScheduleTypes } from "../_lib/types";
 
 interface ContextTypes {
   firstDay: string;
@@ -22,9 +24,13 @@ interface ContextTypes {
 
 export default function Schedule({
   openHours,
+  schedule,
 }: {
   openHours: HoursTypes | undefined;
+  schedule: ScheduleTypes[] | undefined;
 }) {
+  console.log(schedule);
+  console.log(openHours);
   const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
 
   const todayDayArr = TODAY_DAY.split("T")[0]
@@ -34,14 +40,14 @@ export default function Schedule({
   const datesArr = eachDayOfInterval({
     start: firstDay,
     end: lastDay,
-  }).map((day) => format(day, "dd.MM"));
+  }).map((day) => format(day, "dd.MM.yyyy"));
 
   const openHour = Number(openHours?.openHour.split(":").at(0));
   const closeHour = Number(openHours?.closeHour.split(":").at(0));
   const hoursArr = eachHourOfInterval({
     start: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], openHour),
     end: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], closeHour),
-  }).map((date) => format(date, "H:mm"));
+  }).map((date) => format(date, "HH:mm"));
 
   function changeWeek(newWeekFirstDay: string, newWeekLastDay: string) {
     setFirstDay(newWeekFirstDay);
@@ -58,6 +64,19 @@ export default function Schedule({
     const newWeekFirstDay = formatISO(subDays(firstDay, 7));
     const newWeekLastDay = formatISO(subDays(lastDay, 7));
     changeWeek(newWeekFirstDay, newWeekLastDay);
+  }
+  // console.log(new Date('2024-07-18'));
+  // console.log(new Date(2024, 6, 18));
+  //   schedule?.map(training => console.log( isSameDay(new Date(training.date.split('T')[0]), new Date(2024, 5, 3))))
+
+  function compareDay(training, date) {
+    const dateArr = date.split(".");
+    // console.log(dateArr);
+
+    return isSameDay(
+      new Date(training.date.split("T")[0]),
+      new Date(dateArr[0], Number(dateArr[1]) - 1, dateArr[2]),
+    );
   }
 
   return (
@@ -85,8 +104,12 @@ export default function Schedule({
                   onClick={() => console.log(date, hour)}
                   className="flex w-[160px] flex-col text-center text-slate-300"
                 >
-                  {index === 0 ? date : ""}
-                  <ScheduleEvent />
+                  {index === 0 ? date.slice(0, 5) : ""}
+                  {/* {schedule?.map(
+                    (training) =>
+                      compareDay(training, date) && <ScheduleEvent />,
+                  )} */}
+                  <ScheduleEvent date={date} hour={hour} />
                 </div>
               ))}
             </div>

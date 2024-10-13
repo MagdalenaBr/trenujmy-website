@@ -1,18 +1,24 @@
 "use client";
 
 import ScheduleContextProvider from "../_context/ScheduleContext";
-import { HoursTypes } from "../_lib/types";
+import { HoursTypes, ScheduleTypes } from "../_lib/types";
 import ChangeMonth from "./ChangeMonth";
 import ResetButton from "./ResetButton";
 import Schedule from "./Schedule";
 import SectionContainer from "./SectionContainer";
 
-export default function ScheduleContainer({openHours}: {openHours: HoursTypes | undefined}) {
+export default function ScheduleContainer({
+  openHours,
+  schedule,
+}: {
+  openHours: HoursTypes | undefined;
+  schedule: ScheduleTypes[] | undefined;
+}) {
   return (
     <SectionContainer>
       <ScheduleContextProvider>
         <div className="flex w-full justify-between pt-20">
-          <ChangeMonth/>
+          <ChangeMonth />
           <div className="flex gap-10">
             <ResetButton />
             <div className="flex items-center gap-4 border border-darkGray shadow-md shadow-darkGray">
@@ -20,7 +26,7 @@ export default function ScheduleContainer({openHours}: {openHours: HoursTypes | 
             </div>
           </div>
         </div>
-        <Schedule openHours={openHours} />
+        <Schedule openHours={openHours} schedule={schedule}/>
       </ScheduleContextProvider>
     </SectionContainer>
   );
