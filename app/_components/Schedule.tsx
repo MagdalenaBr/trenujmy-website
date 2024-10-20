@@ -6,14 +6,13 @@ import {
   format,
   formatISO,
   isSameDay,
-  isSameHour,
   subDays,
 } from "date-fns";
-import { useState } from "react";
 import { useScheduleContext } from "../_context/ScheduleContext";
+import { HoursTypes, ScheduleTypes } from "../_lib/types";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
-import { HoursTypes, ScheduleTypes } from "../_lib/types";
+import { getSchedule } from "../_lib/data";
 
 interface ContextTypes {
   firstDay: string;
@@ -29,8 +28,6 @@ export default function Schedule({
   openHours: HoursTypes | undefined;
   schedule: ScheduleTypes[] | undefined;
 }) {
-  console.log(schedule);
-  console.log(openHours);
   const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
 
   const todayDayArr = TODAY_DAY.split("T")[0]
@@ -41,6 +38,8 @@ export default function Schedule({
     start: firstDay,
     end: lastDay,
   }).map((day) => format(day, "dd.MM.yyyy"));
+
+  console.log(datesArr);
 
   const openHour = Number(openHours?.openHour.split(":").at(0));
   const closeHour = Number(openHours?.closeHour.split(":").at(0));
@@ -71,12 +70,19 @@ export default function Schedule({
 
   function compareDay(training, date) {
     const dateArr = date.split(".");
-    // console.log(dateArr);
 
     return isSameDay(
+      new Date(dateArr[2], Number(dateArr[1]) - 1, dateArr[0]),
       new Date(training.date.split("T")[0]),
-      new Date(dateArr[0], Number(dateArr[1]) - 1, dateArr[2]),
     );
+  }
+
+  function compareHour(training, hour) {
+const trainingHour = training.date.split('T')[1].split(':')[0]
+ const callendarHour = hour.split(':')[0]
+
+return trainingHour === callendarHour ? true : false
+
   }
 
   return (
@@ -98,6 +104,7 @@ export default function Schedule({
               <div className="flex w-[80px] items-center justify-center text-accentColor">
                 {hour}
               </div>
+
               {datesArr.map((date) => (
                 <div
                   key={date}
@@ -105,11 +112,12 @@ export default function Schedule({
                   className="flex w-[160px] flex-col text-center text-slate-300"
                 >
                   {index === 0 ? date.slice(0, 5) : ""}
-                  {/* {schedule?.map(
+                  {schedule?.map(
                     (training) =>
-                      compareDay(training, date) && <ScheduleEvent />,
-                  )} */}
-                  <ScheduleEvent date={date} hour={hour} />
+                      compareDay(training, date) && compareHour(training, hour) && 
+                        <ScheduleEvent key={training.id} training={training} />
+                      
+                  )}
                 </div>
               ))}
             </div>
@@ -126,3 +134,19 @@ export default function Schedule({
     </div>
   );
 }
+
+// {datesArr.map((date) => (
+//   <div
+//     key={date}
+//     onClick={() => console.log(date, hour)}
+//     className="flex w-[160px] flex-col text-center text-slate-300"
+//   >
+//     {index === 0 ? date.slice(0, 5) : ""}
+//     {schedule?.map(
+//       (training) =>
+//         compareDay(training, date) && <ScheduleEvent date={date} hour={hour}  />
+//     )}
+//     {/* <ScheduleEvent date={date} hour={hour} schedule={schedule} /> */}
+//   </div>
+// ))
+// }

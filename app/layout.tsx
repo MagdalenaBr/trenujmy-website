@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import Header from "./_components/Header";
 import { roboto } from "./fonts";
 import "./globals.css";
-import { ReactQueryProvider } from "./_components/QueryClientProvider";
+
 
 export const metadata: Metadata = {
   title: "Trenuj|My",
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ReactQueryProvider>
+
       <html lang="pl">
         <body
           className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
@@ -26,6 +26,5 @@ export default function RootLayout({
           <main className="tra h-screen w-full bg-black/30">{children}</main>
         </body>
       </html>
-    </ReactQueryProvider>
   );
 }
