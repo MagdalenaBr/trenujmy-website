@@ -23,7 +23,6 @@ export default function ContactForm() {
   } = useForm<ContactFormTypes>({ resolver: zodResolver(ContactFormSchema) });
 
   async function onSubmit(data: ContactFormTypes) {
-    console.log(data);
     const send = await sendEmail(data);
 
     if (send?.success) {

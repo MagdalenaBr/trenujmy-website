@@ -34,7 +34,7 @@ export interface PurchasedMembershipsTypes {
 
 export interface HoursTypes {
   openHour: string;
-  closeHour: string
+  closeHour: string;
 }
 
 export interface ScheduleTypes {
@@ -46,5 +46,14 @@ export interface ScheduleTypes {
   date: string;
   trainers: {
     name: string;
-  }
+  };
+}
+
+export interface BookingTypes {
+  id: number;
+  created_at: string;
+  date: string;
+  status: string;
+  trainerId: number;
+  memberId: number;
 }

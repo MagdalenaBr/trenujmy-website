@@ -7,7 +7,6 @@ export default function CancelButton({ id }: { id: number }) {
 
 async function handleClick() {
   const result = await cancelBookingAction(id)
-  console.log(result);
 
   if (result?.message) {
     toast.error(result?.message);

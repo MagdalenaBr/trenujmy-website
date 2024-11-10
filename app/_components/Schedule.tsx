@@ -9,7 +9,7 @@ import {
   subDays,
 } from "date-fns";
 import { useScheduleContext } from "../_context/ScheduleContext";
-import { HoursTypes, ScheduleTypes } from "../_lib/types";
+import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
 import { getSchedule } from "../_lib/data";
@@ -24,9 +24,13 @@ interface ContextTypes {
 export default function Schedule({
   openHours,
   schedule,
+  bookings,
+  memberId
 }: {
   openHours: HoursTypes | undefined;
   schedule: ScheduleTypes[] | undefined;
+  bookings: BookingTypes[] | undefined;
+  memberId: number | undefined
 }) {
   const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
 
@@ -39,7 +43,6 @@ export default function Schedule({
     end: lastDay,
   }).map((day) => format(day, "dd.MM.yyyy"));
 
-  console.log(datesArr);
 
   const openHour = Number(openHours?.openHour.split(":").at(0));
   const closeHour = Number(openHours?.closeHour.split(":").at(0));
@@ -64,20 +67,22 @@ export default function Schedule({
     const newWeekLastDay = formatISO(subDays(lastDay, 7));
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
-  // console.log(new Date('2024-07-18'));
-  // console.log(new Date(2024, 6, 18));
-  //   schedule?.map(training => console.log( isSameDay(new Date(training.date.split('T')[0]), new Date(2024, 5, 3))))
 
-  function compareDay(training, date) {
-    const dateArr = date.split(".");
+  function compareDay(training: ScheduleTypes, date: string) {
+    const dateArr = (date.split("."))
+
+    console.log(isSameDay(
+      new Date(Number(dateArr[2]), Number(dateArr[1]) - 1, Number(dateArr[0])),
+      new Date(training.date.split("T")[0]),
+    ));
 
     return isSameDay(
-      new Date(dateArr[2], Number(dateArr[1]) - 1, dateArr[0]),
+      new Date(Number(dateArr[2]), Number(dateArr[1]) - 1, Number(dateArr[0])),
       new Date(training.date.split("T")[0]),
     );
   }
 
-  function compareHour(training, hour) {
+  function compareHour(training: ScheduleTypes, hour: string) {
 const trainingHour = training.date.split('T')[1].split(':')[0]
  const callendarHour = hour.split(':')[0]
 
@@ -115,7 +120,7 @@ return trainingHour === callendarHour ? true : false
                   {schedule?.map(
                     (training) =>
                       compareDay(training, date) && compareHour(training, hour) && 
-                        <ScheduleEvent key={training.id} training={training} />
+                        <ScheduleEvent key={training.id} training={training} bookings={bookings} memberId={memberId}/>
                       
                   )}
                 </div>
@@ -135,18 +140,3 @@ return trainingHour === callendarHour ? true : false
   );
 }
 
-// {datesArr.map((date) => (
-//   <div
-//     key={date}
-//     onClick={() => console.log(date, hour)}
-//     className="flex w-[160px] flex-col text-center text-slate-300"
-//   >
-//     {index === 0 ? date.slice(0, 5) : ""}
-//     {schedule?.map(
-//       (training) =>
-//         compareDay(training, date) && <ScheduleEvent date={date} hour={hour}  />
-//     )}
-//     {/* <ScheduleEvent date={date} hour={hour} schedule={schedule} /> */}
-//   </div>
-// ))
-// }

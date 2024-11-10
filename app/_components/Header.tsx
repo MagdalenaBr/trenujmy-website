@@ -8,7 +8,6 @@ import Link from "next/link";
 
 async function Header() {
   const session = await getServerSession();
-  console.log(session);
   return (
     <div className="absolute w-full">
       <header className="z-100 m-auto flex h-24 w-11/12 max-w-[1300px] items-center justify-between">

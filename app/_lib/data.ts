@@ -1,6 +1,7 @@
 import { supabase } from "./supabase";
 import {
   BookingsDataType,
+  BookingTypes,
   HoursTypes,
   MemberDataType,
   PurchasedMembershipsTypes,
@@ -86,4 +87,12 @@ export async function getSchedule(): Promise<ScheduleTypes[]> {
   if (error) throw new Error("Wystąpił błąd podczas pobierania grafiku zajęć.");
 
   return schedule;
+}
+
+export async function getBookings(): Promise<BookingTypes[]> {
+  const { data: bookings, error } = await supabase.from("bookings").select("*");
+
+  if (error) throw new Error("Wystąpił błąd podczas pobierania rezerwacji.");
+
+  return bookings;
 }

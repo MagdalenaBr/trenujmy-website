@@ -1,7 +1,7 @@
 "use client";
 
 import ScheduleContextProvider from "../_context/ScheduleContext";
-import { HoursTypes, ScheduleTypes } from "../_lib/types";
+import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
 import ChangeMonth from "./ChangeMonth";
 import ResetButton from "./ResetButton";
 import Schedule from "./Schedule";
@@ -10,9 +10,13 @@ import SectionContainer from "./SectionContainer";
 export default function ScheduleContainer({
   openHours,
   schedule,
+  bookings,
+  memberId
 }: {
   openHours: HoursTypes | undefined;
   schedule: ScheduleTypes[] | undefined;
+  bookings: BookingTypes[] | undefined;
+  memberId: number |undefined
 }) {
   return (
     <SectionContainer>
@@ -26,7 +30,7 @@ export default function ScheduleContainer({
             </div>
           </div>
         </div>
-        <Schedule openHours={openHours} schedule={schedule}/>
+        <Schedule openHours={openHours} schedule={schedule} bookings={bookings} memberId={memberId}/>
       </ScheduleContextProvider>
     </SectionContainer>
   );

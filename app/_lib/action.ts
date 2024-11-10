@@ -114,3 +114,24 @@ export async function editMemberDataAction(
   }
   redirect("/user/profile");
 }
+
+export async function addBookingAction(bookingData) {
+  console.log(bookingData);
+  try {
+    const session = await getServerSession();
+    if (!session) throw new Error("Musisz być zalogowany!");
+    const { data, error } = await supabase
+      .from("bookings")
+      .insert([bookingData])
+      .select();
+
+    if (error)
+      throw new Error(
+        "Wystąpił problem ze rezerwacją zajęć. Spróbuj ponownie.",
+      );
+
+    revalidatePath("/user/classes");
+  } catch (error: any) {
+    return { message: error.message };
+  }
+}
