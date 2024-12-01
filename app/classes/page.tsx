@@ -13,11 +13,10 @@ export default async function Page() {
   const bookings = await getBookings();
 
   const session = await getServerSession();
-  console.log(session?.user?.email);
 
-  const member = (await getMemberData(session?.user?.email || "")).at(
-    0,
-  );
+  const member = (await getMemberData(session?.user?.email || "")).at(0);
+
+  console.log(schedule);
 
   return (
     <>

@@ -44,7 +44,7 @@ export async function getMemberBookings(
   let query = supabase
     .from("bookings")
     .select("*, trainers(name)")
-    .eq("memberId", memberId);
+    .eq("memberId", memberId).order("date", { ascending: false });
 
   if (selectedBookingStatus) query = query.eq("status", selectedBookingStatus);
 
@@ -82,15 +82,17 @@ export async function getOpenHours(): Promise<HoursTypes[]> {
 export async function getSchedule(): Promise<ScheduleTypes[]> {
   const { data: schedule, error } = await supabase
     .from("schedule")
-    .select("*, trainers(name)");
+    .select("*, trainers(name)").order("date");;
 
   if (error) throw new Error("Wystąpił błąd podczas pobierania grafiku zajęć.");
+
+  console.log(schedule);
 
   return schedule;
 }
 
 export async function getBookings(): Promise<BookingTypes[]> {
-  const { data: bookings, error } = await supabase.from("bookings").select("*");
+  const { data: bookings, error } = await supabase.from("bookings").select("*").order("date", { ascending: false });
 
   if (error) throw new Error("Wystąpił błąd podczas pobierania rezerwacji.");
 

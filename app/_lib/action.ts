@@ -115,11 +115,13 @@ export async function editMemberDataAction(
   redirect("/user/profile");
 }
 
-export async function addBookingAction(bookingData) {
-  console.log(bookingData);
+export async function addBookingAction(bookingData, isBooked) {
+
   try {
     const session = await getServerSession();
     if (!session) throw new Error("Musisz być zalogowany!");
+    if(isBooked) throw new Error('Zajęcia zostały już zarezerwowane!')
+    
     const { data, error } = await supabase
       .from("bookings")
       .insert([bookingData])

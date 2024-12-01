@@ -1,8 +1,9 @@
-import { addHours } from "date-fns";
+import { add, addHours, formatISO, isBefore } from "date-fns";
 import { BookingTypes, ScheduleTypes } from "../_lib/types";
 import { getServerSession } from "next-auth";
 import { addBookingAction } from "../_lib/action";
 import toast from "react-hot-toast";
+import { TODAY_DAY } from "../_utils/constants";
 
 export default function ScheduleEvent({
   training,
@@ -18,11 +19,13 @@ export default function ScheduleEvent({
   );
   const numOfBookings = scheduleEventBookings?.length;
 
-  const isBooked = !!scheduleEventBookings?.filter(
+  const isBooked = scheduleEventBookings?.some(
     (booking) => booking.memberId === memberId,
-  ) 
+  );
 
-  console.log(isBooked);
+  const currentDatePlusOneHour = formatISO(add(TODAY_DAY, { hours: 1 }));
+
+  const isPassedDate = isBefore(training.date, currentDatePlusOneHour);
 
   const bookingData = {
     memberId,
@@ -31,14 +34,12 @@ export default function ScheduleEvent({
     trainerId: training.trainerId,
   };
 
-  // console.log(bookingData);
-
   async function addBooking(bookingData) {
-    const result = await addBookingAction(bookingData);
+    const result = await addBookingAction(bookingData, isBooked);
     if (result?.message) {
       toast.error(result?.message);
     } else {
-      toast.success("Zaajęcia zostały zarezerwowane.");
+      toast.success("Zajęcia zostały zarezerwowane.");
     }
   }
 
@@ -54,11 +55,11 @@ export default function ScheduleEvent({
         {numOfBookings}/{training.numOfPlaces}
       </p>
       <button
-        disabled={isBooked}
+        disabled={isBooked || isPassedDate}
         onClick={() => addBooking(bookingData)}
-        className="w-full bg-accentColor p-1 font-semibold uppercase tracking-wider hover:bg-transparent hover:text-accentColor"
+        className={`w-full bg-accentColor p-1 font-semibold uppercase tracking-wider hover:bg-transparent hover:text-accentColor ${isBooked && `bg-transparent text-accentColor`} ${isPassedDate && `bg-transparent text-gray-500 hover:text-gray-500`} `}
       >
-        {!isBooked ? " Zarezerwuj" : "Zarezerwowano"}
+        {isBooked ? " Zarezerwowano" : "Zarezerwuj"}
       </button>
     </div>
   );

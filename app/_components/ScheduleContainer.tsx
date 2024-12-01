@@ -11,12 +11,12 @@ export default function ScheduleContainer({
   openHours,
   schedule,
   bookings,
-  memberId
+  memberId,
 }: {
   openHours: HoursTypes | undefined;
   schedule: ScheduleTypes[] | undefined;
   bookings: BookingTypes[] | undefined;
-  memberId: number |undefined
+  memberId: number | undefined;
 }) {
   return (
     <SectionContainer>
@@ -30,7 +30,12 @@ export default function ScheduleContainer({
             </div>
           </div>
         </div>
-        <Schedule openHours={openHours} schedule={schedule} bookings={bookings} memberId={memberId}/>
+        <Schedule
+          openHours={openHours}
+          schedule={schedule}
+          bookings={bookings}
+          memberId={memberId}
+        />
       </ScheduleContextProvider>
     </SectionContainer>
   );

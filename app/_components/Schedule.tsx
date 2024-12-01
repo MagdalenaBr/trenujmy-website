@@ -25,15 +25,15 @@ export default function Schedule({
   openHours,
   schedule,
   bookings,
-  memberId
+  memberId,
 }: {
   openHours: HoursTypes | undefined;
   schedule: ScheduleTypes[] | undefined;
   bookings: BookingTypes[] | undefined;
-  memberId: number | undefined
+  memberId: number | undefined;
 }) {
-  const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
 
+  const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
   const todayDayArr = TODAY_DAY.split("T")[0]
     .split("-")
     .map((num) => Number(num));
@@ -42,7 +42,6 @@ export default function Schedule({
     start: firstDay,
     end: lastDay,
   }).map((day) => format(day, "dd.MM.yyyy"));
-
 
   const openHour = Number(openHours?.openHour.split(":").at(0));
   const closeHour = Number(openHours?.closeHour.split(":").at(0));
@@ -68,26 +67,23 @@ export default function Schedule({
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
 
-  function compareDay(training: ScheduleTypes, date: string) {
-    const dateArr = (date.split("."))
+  function compareDay(training, eventDate) {
 
-    console.log(isSameDay(
-      new Date(Number(dateArr[2]), Number(dateArr[1]) - 1, Number(dateArr[0])),
-      new Date(training.date.split("T")[0]),
-    ));
+    const trainingDateArr = training.date.split("T")[0].split("-");
 
-    return isSameDay(
-      new Date(Number(dateArr[2]), Number(dateArr[1]) - 1, Number(dateArr[0])),
-      new Date(training.date.split("T")[0]),
+    const trainingDate = format(
+      new Date(trainingDateArr[0], trainingDateArr[1] - 1, trainingDateArr[2]),
+      "dd.MM.yyyy",
     );
+
+    return eventDate === trainingDate;
   }
 
   function compareHour(training: ScheduleTypes, hour: string) {
-const trainingHour = training.date.split('T')[1].split(':')[0]
- const callendarHour = hour.split(':')[0]
+    const trainingHour = training.date.split("T")[1].split(":")[0];
+    const callendarHour = hour.split(":")[0];
 
-return trainingHour === callendarHour ? true : false
-
+    return trainingHour === callendarHour;
   }
 
   return (
@@ -119,9 +115,15 @@ return trainingHour === callendarHour ? true : false
                   {index === 0 ? date.slice(0, 5) : ""}
                   {schedule?.map(
                     (training) =>
-                      compareDay(training, date) && compareHour(training, hour) && 
-                        <ScheduleEvent key={training.id} training={training} bookings={bookings} memberId={memberId}/>
-                      
+                      compareDay(training, date) &&
+                      compareHour(training, hour) && (
+                        <ScheduleEvent
+                          key={training.id}
+                          training={training}
+                          bookings={bookings}
+                          memberId={memberId}
+                        />
+                      ),
                   )}
                 </div>
               ))}
@@ -139,4 +141,3 @@ return trainingHour === callendarHour ? true : false
     </div>
   );
 }
-
