@@ -1,3 +1,5 @@
+"use client";
+
 import { useScheduleContext } from "../_context/ScheduleContext";
 import { LAST_DAY_IN_WEEK, TODAY_DAY } from "../_utils/constants";
 

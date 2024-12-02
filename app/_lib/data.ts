@@ -44,7 +44,8 @@ export async function getMemberBookings(
   let query = supabase
     .from("bookings")
     .select("*, trainers(name)")
-    .eq("memberId", memberId).order("date", { ascending: false });
+    .eq("memberId", memberId)
+    .order("date", { ascending: false });
 
   if (selectedBookingStatus) query = query.eq("status", selectedBookingStatus);
 
@@ -82,19 +83,31 @@ export async function getOpenHours(): Promise<HoursTypes[]> {
 export async function getSchedule(): Promise<ScheduleTypes[]> {
   const { data: schedule, error } = await supabase
     .from("schedule")
-    .select("*, trainers(name)").order("date");;
+    .select("*, trainers(name)")
+    .order("date");
 
   if (error) throw new Error("Wystąpił błąd podczas pobierania grafiku zajęć.");
-
-  console.log(schedule);
 
   return schedule;
 }
 
 export async function getBookings(): Promise<BookingTypes[]> {
-  const { data: bookings, error } = await supabase.from("bookings").select("*").order("date", { ascending: false });
+  const { data: bookings, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .order("date", { ascending: false });
 
   if (error) throw new Error("Wystąpił błąd podczas pobierania rezerwacji.");
 
   return bookings;
+}
+
+export async function getGroupTrainers() {
+  const { data: trainers, error } = await supabase
+    .from("trainers")
+    .select("*")
+    .neq("category", "trener personalny");
+
+  if (error) throw new Error("Wystąpił błąd podczas wyświetlenia trenerów.");
+  return trainers;
 }

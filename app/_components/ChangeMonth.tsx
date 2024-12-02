@@ -1,3 +1,5 @@
+'use client'
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { addMonths, format, formatISO } from "date-fns";
 import { pl } from "date-fns/locale";

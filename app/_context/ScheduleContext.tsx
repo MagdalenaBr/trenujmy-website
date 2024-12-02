@@ -1,3 +1,5 @@
+'use client'
+
 
 import { createContext, useContext, useState } from "react";
 import { LAST_DAY_IN_WEEK, TODAY_DAY } from "../_utils/constants";

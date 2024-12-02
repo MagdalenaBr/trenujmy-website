@@ -1,23 +1,27 @@
-"use client";
-
+import { getServerSession } from "next-auth";
 import ScheduleContextProvider from "../_context/ScheduleContext";
-import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
+import {
+  getBookings,
+  getMemberData,
+  getOpenHours,
+  getSchedule,
+} from "../_lib/data";
 import ChangeMonth from "./ChangeMonth";
 import ResetButton from "./ResetButton";
 import Schedule from "./Schedule";
 import SectionContainer from "./SectionContainer";
+import SelectTrainer from "./SelectTrainer";
 
-export default function ScheduleContainer({
-  openHours,
-  schedule,
-  bookings,
-  memberId,
-}: {
-  openHours: HoursTypes | undefined;
-  schedule: ScheduleTypes[] | undefined;
-  bookings: BookingTypes[] | undefined;
-  memberId: number | undefined;
-}) {
+export default async function ScheduleContainer() {
+  const session = await getServerSession();
+
+  const [openHours, schedule, bookings, member] = await Promise.all([
+    getOpenHours(),
+    getSchedule(),
+    getBookings(),
+    getMemberData(session?.user?.email || ""),
+  ]);
+
   return (
     <SectionContainer>
       <ScheduleContextProvider>
@@ -25,16 +29,14 @@ export default function ScheduleContainer({
           <ChangeMonth />
           <div className="flex gap-10">
             <ResetButton />
-            <div className="flex items-center gap-4 border border-darkGray shadow-md shadow-darkGray">
-              <span className="px-2 text-xl uppercase">Trener</span>
-            </div>
+            <SelectTrainer />
           </div>
         </div>
         <Schedule
-          openHours={openHours}
+          openHours={openHours.at(0)}
           schedule={schedule}
           bookings={bookings}
-          memberId={memberId}
+          memberId={member.at(0)?.id}
         />
       </ScheduleContextProvider>
     </SectionContainer>
