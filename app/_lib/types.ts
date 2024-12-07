@@ -57,3 +57,13 @@ export interface BookingTypes {
   trainerId: number;
   memberId: number;
 }
+
+export interface TrainerTypes {
+  id: number;
+  created_at: string;
+  name: string;
+  category: string;
+  price: number;
+  phone: string;
+  image: string;
+}

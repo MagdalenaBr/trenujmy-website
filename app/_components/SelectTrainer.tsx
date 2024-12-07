@@ -1,14 +1,24 @@
-import { getGroupTrainers } from "../_lib/data";
+"use client";
 
-export default async function SelectTrainer() {
-  const groupTrainers = await getGroupTrainers();
+import { useScheduleContext } from "../_context/ScheduleContext";
+import { TrainerTypes } from "../_lib/types";
 
-  const trainers = groupTrainers;
+export default function SelectTrainer({
+  groupTrainers,
+}: {
+  groupTrainers: TrainerTypes[];
+}) {
+  const { trainer, setTrainer } = useScheduleContext();
+
   return (
     <div className="flex items-center gap-4 border border-darkGray shadow-md shadow-darkGray">
-      <select className="bg-transparent px-2 text-xl uppercase">
-        <option hidden>Trener</option>
-        {trainers.map((trainer) => (
+      <select
+        value={trainer}
+        onChange={(e) => setTrainer(e.target.value)}
+        className="bg-transparent px-2 text-xl uppercase"
+      >
+        <option value="all">trener</option>
+        {groupTrainers.map((trainer) => (
           <option key={trainer.id} value={trainer.name}>
             {trainer.name}
           </option>

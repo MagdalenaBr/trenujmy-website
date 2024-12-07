@@ -6,9 +6,10 @@ import {
   MemberDataType,
   PurchasedMembershipsTypes,
   ScheduleTypes,
+  TrainerTypes,
 } from "./types";
 
-export async function getTrainers() {
+export async function getTrainers(): Promise<TrainerTypes[]> {
   const { data: trainers, error } = await supabase.from("trainers").select("*");
 
   if (error) throw new Error("Dane trenerów nie zostały pobrane");
@@ -102,7 +103,7 @@ export async function getBookings(): Promise<BookingTypes[]> {
   return bookings;
 }
 
-export async function getGroupTrainers() {
+export async function getGroupTrainers(): Promise<TrainerTypes[]> {
   const { data: trainers, error } = await supabase
     .from("trainers")
     .select("*")

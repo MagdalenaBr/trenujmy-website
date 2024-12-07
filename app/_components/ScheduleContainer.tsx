@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import ScheduleContextProvider from "../_context/ScheduleContext";
 import {
   getBookings,
+  getGroupTrainers,
   getMemberData,
   getOpenHours,
   getSchedule,
@@ -15,11 +16,13 @@ import SelectTrainer from "./SelectTrainer";
 export default async function ScheduleContainer() {
   const session = await getServerSession();
 
-  const [openHours, schedule, bookings, member] = await Promise.all([
+
+  const [openHours, schedule, bookings, member, groupTrainers] = await Promise.all([
     getOpenHours(),
     getSchedule(),
     getBookings(),
     getMemberData(session?.user?.email || ""),
+    getGroupTrainers()
   ]);
 
   return (
@@ -29,7 +32,7 @@ export default async function ScheduleContainer() {
           <ChangeMonth />
           <div className="flex gap-10">
             <ResetButton />
-            <SelectTrainer />
+            <SelectTrainer groupTrainers={groupTrainers} />
           </div>
         </div>
         <Schedule

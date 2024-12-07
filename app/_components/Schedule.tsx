@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import {
@@ -7,21 +7,12 @@ import {
   eachHourOfInterval,
   format,
   formatISO,
-  isSameDay,
   subDays,
 } from "date-fns";
 import { useScheduleContext } from "../_context/ScheduleContext";
 import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
-import { getSchedule } from "../_lib/data";
-
-interface ContextTypes {
-  firstDay: string;
-  setFirstDay: React.Dispatch<React.SetStateAction<string>>;
-  lastDay: string;
-  setLastDay: React.Dispatch<React.SetStateAction<string>>;
-}
 
 export default function Schedule({
   openHours,
@@ -34,8 +25,8 @@ export default function Schedule({
   bookings: BookingTypes[] | undefined;
   memberId: number | undefined;
 }) {
-
-  const { firstDay, setFirstDay, lastDay, setLastDay } = useScheduleContext();
+  const { firstDay, setFirstDay, lastDay, setLastDay, trainer } =
+    useScheduleContext();
   const todayDayArr = TODAY_DAY.split("T")[0]
     .split("-")
     .map((num) => Number(num));
@@ -51,6 +42,10 @@ export default function Schedule({
     start: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], openHour),
     end: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], closeHour),
   }).map((date) => format(date, "HH:mm"));
+  const selectedTrainerClasses =
+    trainer === "all"
+      ? schedule
+      : schedule?.filter((classes) => classes.trainers.name === trainer);
 
   function changeWeek(newWeekFirstDay: string, newWeekLastDay: string) {
     setFirstDay(newWeekFirstDay);
@@ -69,10 +64,8 @@ export default function Schedule({
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
 
-  function compareDay(training, eventDate) {
-
-    const trainingDateArr = training.date.split("T")[0].split("-");
-
+  function compareDay(training: ScheduleTypes, eventDate: string) {
+    const trainingDateArr = training.date.split("T")[0].split("-").map(Number);
     const trainingDate = format(
       new Date(trainingDateArr[0], trainingDateArr[1] - 1, trainingDateArr[2]),
       "dd.MM.yyyy",
@@ -111,11 +104,10 @@ export default function Schedule({
               {datesArr.map((date) => (
                 <div
                   key={date}
-                  onClick={() => console.log(date, hour)}
                   className="flex w-[160px] flex-col text-center text-slate-300"
                 >
                   {index === 0 ? date.slice(0, 5) : ""}
-                  {schedule?.map(
+                  {selectedTrainerClasses?.map(
                     (training) =>
                       compareDay(training, date) &&
                       compareHour(training, hour) && (

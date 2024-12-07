@@ -1,5 +1,4 @@
-'use client'
-
+"use client";
 
 import { createContext, useContext, useState } from "react";
 import { LAST_DAY_IN_WEEK, TODAY_DAY } from "../_utils/constants";
@@ -9,6 +8,8 @@ interface ContextTypes {
   setFirstDay: React.Dispatch<React.SetStateAction<string>>;
   lastDay: string;
   setLastDay: React.Dispatch<React.SetStateAction<string>>;
+  trainer: string;
+  setTrainer: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ScheduleContext = createContext<ContextTypes | undefined>(undefined);
@@ -20,10 +21,20 @@ export default function ScheduleContextProvider({
 }) {
   const [firstDay, setFirstDay] = useState(TODAY_DAY);
   const [lastDay, setLastDay] = useState(LAST_DAY_IN_WEEK);
+  const [trainer, setTrainer] = useState("all");
+
+
 
   return (
     <ScheduleContext.Provider
-      value={{ firstDay, setFirstDay, lastDay, setLastDay }}
+      value={{
+        firstDay,
+        setFirstDay,
+        lastDay,
+        setLastDay,
+        trainer,
+        setTrainer,
+      }}
     >
       {children}
     </ScheduleContext.Provider>
