@@ -96,7 +96,7 @@ export async function getBookings(): Promise<BookingTypes[]> {
   const { data: bookings, error } = await supabase
     .from("bookings")
     .select("*")
-    .order("date", { ascending: false });
+    .order("date", { ascending: false }).neq('status', 'anulowana');
 
   if (error) throw new Error("Wystąpił błąd podczas pobierania rezerwacji.");
 
