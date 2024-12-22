@@ -1,14 +1,15 @@
 "use client";
 
 import { useScheduleContext } from "../_context/ScheduleContext";
-import { LAST_DAY_IN_WEEK, TODAY_DAY } from "../_utils/constants";
+import { TODAY_DAY } from "../_utils/constants";
 
 export default function ResetButton() {
-  const { setFirstDay, setLastDay, setTrainer } = useScheduleContext();
+  const { setFirstDay, setLastDay, setTrainer, lastDayInRange } =
+    useScheduleContext();
 
   function handleClick() {
     setFirstDay(TODAY_DAY);
-    setLastDay(LAST_DAY_IN_WEEK);
+    setLastDay(lastDayInRange);
     setTrainer("all");
   }
 

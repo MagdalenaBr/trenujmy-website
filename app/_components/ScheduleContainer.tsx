@@ -16,21 +16,21 @@ import SelectTrainer from "./SelectTrainer";
 export default async function ScheduleContainer() {
   const session = await getServerSession();
 
-
-  const [openHours, schedule, bookings, member, groupTrainers] = await Promise.all([
-    getOpenHours(),
-    getSchedule(),
-    getBookings(),
-    getMemberData(session?.user?.email || ""),
-    getGroupTrainers()
-  ]);
+  const [openHours, schedule, bookings, member, groupTrainers] =
+    await Promise.all([
+      getOpenHours(),
+      getSchedule(),
+      getBookings(),
+      getMemberData(session?.user?.email || ""),
+      getGroupTrainers(),
+    ]);
 
   return (
     <SectionContainer>
       <ScheduleContextProvider>
-        <div className="flex w-full justify-between pt-20">
+        <div className="flex w-full flex-col justify-between gap-4 pt-20 lg:flex-row">
           <ChangeMonth />
-          <div className="flex gap-10">
+          <div className="flex flex-col gap-4 lg:flex-row lg:gap-10">
             <ResetButton />
             <SelectTrainer groupTrainers={groupTrainers} />
           </div>

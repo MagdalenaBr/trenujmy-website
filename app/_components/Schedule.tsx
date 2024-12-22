@@ -14,6 +14,7 @@ import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
 
+
 export default function Schedule({
   openHours,
   schedule,
@@ -101,6 +102,8 @@ export default function Schedule({
                 {hour}
               </div>
 
+              {/* COMPUTER */}
+
               {datesArr.map((date) => (
                 <div
                   key={date}
@@ -121,6 +124,8 @@ export default function Schedule({
                   )}
                 </div>
               ))}
+
+              {/* MOBILE */}
             </div>
           ))}
         </div>
