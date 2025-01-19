@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import {  TODAY_DAY } from "../_utils/constants";
+import { TODAY_DAY } from "../_utils/constants";
 import { addDays, formatISO } from "date-fns";
 import useWindowWidth from "../_hooks/useWindowWidth";
 
@@ -29,15 +29,19 @@ export default function ScheduleContextProvider({
   let lastDayInRange = formatISO(
     addDays(
       TODAY_DAY,
-      windowWidth ? windowWidth <= 640
-        ? 0
-        :  windowWidth <= 768
-          ? 1
-          :  windowWidth <= 1024
-            ? 3
-            :  windowWidth > 1024
-              ? 6
-              : 0 : 0,
+      windowWidth
+        ? windowWidth <= 640
+          ? 0
+          : windowWidth <= 1024
+            ? 2
+            : windowWidth <= 1280
+              ? 3
+              : windowWidth <= 1536
+                ? 4
+                : windowWidth > 1536
+                  ? 6
+                  : 0
+        : 6,
     ),
   );
   const [firstDay, setFirstDay] = useState(TODAY_DAY);

@@ -14,7 +14,6 @@ import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
 
-
 export default function Schedule({
   openHours,
   schedule,
@@ -43,7 +42,7 @@ export default function Schedule({
     start: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], openHour),
     end: new Date(todayDayArr[0], todayDayArr[1], todayDayArr[2], closeHour),
   }).map((date) => format(date, "HH:mm"));
-  const selectedTrainerClasses =
+  const selectedSportsActivities =
     trainer === "all"
       ? schedule
       : schedule?.filter((classes) => classes.trainers.name === trainer);
@@ -86,19 +85,19 @@ export default function Schedule({
     <div className="flex">
       <button
         onClick={changeWeekBackwards}
-        className="mx-4 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor transition-transform hover:scale-105"
+        className="mx-2 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor transition-transform hover:scale-105 lg:mx-4"
       >
         <ChevronLeftIcon />
       </button>
 
-      <div className="flex w-full justify-between gap-10 border bg-darkGray px-4 text-xl text-textLight">
+      <div className="flex w-full justify-between gap-10 border bg-darkGray px-4 text-textLight lg:text-xl">
         <div className="w-full">
           {hoursArr.map((hour, index) => (
             <div
               key={hour}
-              className={`border-accentColor/30" flex h-[150px] justify-between gap-4 border-b ${index === 0 && "h-[180px]"}`}
+              className={`border-accentColor/30" flex h-[150px] justify-between border-b p-2 lg:gap-4 ${index === 0 && "h-[180px]"}`}
             >
-              <div className="flex w-[80px] items-center justify-center text-accentColor">
+              <div className="flex w-10 items-center justify-center text-accentColor lg:w-20">
                 {hour}
               </div>
 
@@ -107,10 +106,10 @@ export default function Schedule({
               {datesArr.map((date) => (
                 <div
                   key={date}
-                  className="flex w-[160px] flex-col text-center text-slate-300"
+                  className="flex w-[130px] flex-col text-center text-slate-300 lg:w-[160px]"
                 >
                   {index === 0 ? date.slice(0, 5) : ""}
-                  {selectedTrainerClasses?.map(
+                  {selectedSportsActivities?.map(
                     (training) =>
                       compareDay(training, date) &&
                       compareHour(training, hour) && (
@@ -133,7 +132,7 @@ export default function Schedule({
 
       <button
         onClick={changeWeekForward}
-        className="mx-4 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor transition-transform hover:scale-105"
+        className="mx-2 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor transition-transform hover:scale-105 lg:mx-4"
       >
         <ChevronRightIcon />
       </button>

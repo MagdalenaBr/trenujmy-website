@@ -1,9 +1,10 @@
-import { add, addHours, formatISO, isBefore } from "date-fns";
+import { add, addHours, format, formatISO, isBefore } from "date-fns";
 import { BookingTypes, ScheduleTypes } from "../_lib/types";
 import { getServerSession } from "next-auth";
 import { addBookingAction } from "../_lib/action";
 import toast from "react-hot-toast";
 import { TODAY_DAY } from "../_utils/constants";
+import { pl } from "date-fns/locale/pl";
 
 export default function ScheduleEvent({
   training,
@@ -44,8 +45,9 @@ export default function ScheduleEvent({
   }
 
   return (
-    <div className="m-2 h-full w-full bg-accentColor/10 p-2 text-start text-[12px] leading-5 transition-transform hover:scale-105">
+    <div className="h-full w-full bg-accentColor/10 p-2 text-start text-[12px] leading-5 transition-transform hover:scale-105">
       <div className="flex justify-between pb-2">
+        <p>{format(new Date(training.date.split("T")[0]), "dd MMM", {locale: pl})}</p>
         <p>{training.date.split("T")[1].slice(0, 5)}</p>
         <span> 50 min</span>
       </div>
