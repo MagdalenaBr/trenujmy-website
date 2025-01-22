@@ -28,9 +28,9 @@ export default async function ScheduleContainer() {
   return (
     <SectionContainer>
       <ScheduleContextProvider>
-        <div className="flex w-full flex-col justify-between gap-4 pt-20 lg:flex-row">
+        <div className="flex w-full flex-col justify-between gap-4 pt-20 md:flex-row">
           <ChangeMonth />
-          <div className="flex flex-col gap-4 lg:flex-row lg:gap-10">
+          <div className="flex flex-col gap-4 md:flex-row lg:gap-10">
             <ResetButton />
             <SelectTrainer groupTrainers={groupTrainers} />
           </div>

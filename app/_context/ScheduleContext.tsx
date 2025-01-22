@@ -13,6 +13,7 @@ interface ContextTypes {
   trainer: string;
   setTrainer: React.Dispatch<React.SetStateAction<string>>;
   lastDayInRange: string;
+  numOfDaysInRange: number;
 }
 
 const ScheduleContext = createContext<ContextTypes | undefined>(undefined);
@@ -25,25 +26,22 @@ export default function ScheduleContextProvider({
   // export const LAST_DAY_IN_WEEK = formatISO(addDays(TODAY_DAY, 6))
 
   const windowWidth = useWindowWidth();
+  const numOfDaysInRange = windowWidth
+    ? windowWidth <= 640
+      ? 1
+      : windowWidth <= 1024
+        ? 3
+        : windowWidth <= 1280
+          ? 4
+          : windowWidth <= 1536
+            ? 5
+            : windowWidth > 1536
+              ? 7
+              : 1
+    : 7;
 
-  let lastDayInRange = formatISO(
-    addDays(
-      TODAY_DAY,
-      windowWidth
-        ? windowWidth <= 640
-          ? 0
-          : windowWidth <= 1024
-            ? 2
-            : windowWidth <= 1280
-              ? 3
-              : windowWidth <= 1536
-                ? 4
-                : windowWidth > 1536
-                  ? 6
-                  : 0
-        : 6,
-    ),
-  );
+  let lastDayInRange = formatISO(addDays(TODAY_DAY, numOfDaysInRange - 1));
+
   const [firstDay, setFirstDay] = useState(TODAY_DAY);
   const [lastDay, setLastDay] = useState(lastDayInRange);
   const [trainer, setTrainer] = useState("all");
@@ -60,6 +58,7 @@ export default function ScheduleContextProvider({
         trainer,
         setTrainer,
         lastDayInRange,
+        numOfDaysInRange,
       }}
     >
       {children}

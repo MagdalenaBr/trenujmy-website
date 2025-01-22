@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { addMonths, format, formatISO } from "date-fns";
@@ -6,7 +6,8 @@ import { pl } from "date-fns/locale";
 import { useScheduleContext } from "../_context/ScheduleContext";
 
 export default function ChangeMonth() {
-  const { setFirstDay, firstDay, setLastDay } = useScheduleContext();
+  const { setFirstDay, firstDay, setLastDay, numOfDaysInRange } =
+    useScheduleContext();
 
   const currMonth = Number(format(firstDay, "L"));
   const currYear = Number(format(firstDay, "y"));
@@ -14,15 +15,23 @@ export default function ChangeMonth() {
 
   function addMonth() {
     setFirstDay(formatISO(addMonths(new Date(currYear, currMonth - 1, 1), 1)));
-    setLastDay(formatISO(addMonths(new Date(currYear, currMonth - 1, 7), 1)));
+    setLastDay(
+      formatISO(
+        addMonths(new Date(currYear, currMonth - 1, numOfDaysInRange), 1),
+      ),
+    );
   }
   function subMonth() {
     setFirstDay(formatISO(addMonths(new Date(currYear, currMonth - 1, 1), -1)));
-    setLastDay(formatISO(addMonths(new Date(currYear, currMonth - 1, 7), -1)));
+    setLastDay(
+      formatISO(
+        addMonths(new Date(currYear, currMonth - 1, numOfDaysInRange), -1),
+      ),
+    );
   }
 
   return (
-    <div className="flex items-center gap-4 border border-darkGray shadow-md shadow-darkGray">
+    <div className="flex items-center justify-between border border-darkGray shadow-md shadow-darkGray">
       <button onClick={subMonth}>
         <ChevronLeftIcon className="w-8" />
       </button>

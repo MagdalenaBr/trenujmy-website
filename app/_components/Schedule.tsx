@@ -25,8 +25,16 @@ export default function Schedule({
   bookings: BookingTypes[] | undefined;
   memberId: number | undefined;
 }) {
-  const { firstDay, setFirstDay, lastDay, setLastDay, trainer } =
-    useScheduleContext();
+  const {
+    firstDay,
+    setFirstDay,
+    lastDay,
+    setLastDay,
+    trainer,
+    numOfDaysInRange,
+  } = useScheduleContext();
+  console.log(numOfDaysInRange);
+
   const todayDayArr = TODAY_DAY.split("T")[0]
     .split("-")
     .map((num) => Number(num));
@@ -53,14 +61,14 @@ export default function Schedule({
   }
 
   function changeWeekForward() {
-    const newWeekFirstDay = formatISO(addDays(firstDay, 7));
-    const newWeekLastDay = formatISO(addDays(lastDay, 7));
+    const newWeekFirstDay = formatISO(addDays(firstDay, numOfDaysInRange));
+    const newWeekLastDay = formatISO(addDays(lastDay, numOfDaysInRange));
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
 
   function changeWeekBackwards() {
-    const newWeekFirstDay = formatISO(subDays(firstDay, 7));
-    const newWeekLastDay = formatISO(subDays(lastDay, 7));
+    const newWeekFirstDay = formatISO(subDays(firstDay, numOfDaysInRange));
+    const newWeekLastDay = formatISO(subDays(lastDay, numOfDaysInRange));
     changeWeek(newWeekFirstDay, newWeekLastDay);
   }
 

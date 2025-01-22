@@ -11,11 +11,11 @@ export default function SelectTrainer({
   const { trainer, setTrainer } = useScheduleContext();
 
   return (
-    <div className="flex items-center gap-4 border border-darkGray shadow-md shadow-darkGray">
+    <div className="flex items-center justify-center border border-darkGray shadow-md shadow-darkGray">
       <select
         value={trainer}
         onChange={(e) => setTrainer(e.target.value)}
-        className="bg-transparent px-2 text-xl uppercase"
+        className="bg-transparent px-2 text-center text-xl uppercase"
       >
         <option value="all">trener</option>
         {groupTrainers.map((trainer) => (
