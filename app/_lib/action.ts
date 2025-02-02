@@ -20,13 +20,14 @@ const resend = new Resend(process.env.RESEND_KEY);
 export async function sendEmail(data: ContactFormTypes) {
   const result = ContactFormSchema.safeParse(data);
   if (result.success) {
-    const { firstName, lastName, email, message } = result.data;
+    const { firstName, lastNameContact, email, message } = result.data;
+    console.log(lastNameContact);
     try {
       const data = await resend.emails.send({
         from: "Trenuj|My <onboarding@resend.dev>",
         to: ["trenujmy3@gmail.com"],
         subject: "Wiadomość z formularza kontaktowego",
-        react: EmailTemplate({ firstName, lastName, email, message }),
+        react: EmailTemplate({ firstName, lastName : lastNameContact, email, message }),
       });
       return { success: true, data };
     } catch (error) {
@@ -115,7 +116,12 @@ export async function editMemberDataAction(
   redirect("/user/profile");
 }
 
-export async function addBookingAction(bookingData, isBooked) {
+export async function addBookingAction(bookingData: {
+  date: string;
+  status: string;
+  trainerId: number;
+  memberId: number | undefined;
+}, isBooked: boolean | undefined) {
 
   try {
     const session = await getServerSession();

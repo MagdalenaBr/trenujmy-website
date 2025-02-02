@@ -108,9 +108,6 @@ export default function Schedule({
               <div className="flex w-10 items-center justify-center text-accentColor lg:w-20">
                 {hour}
               </div>
-
-              {/* COMPUTER */}
-
               {datesArr.map((date) => (
                 <div
                   key={date}
@@ -132,7 +129,6 @@ export default function Schedule({
                 </div>
               ))}
 
-              {/* MOBILE */}
             </div>
           ))}
         </div>
