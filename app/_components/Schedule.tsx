@@ -33,7 +33,7 @@ export default function Schedule({
     trainer,
     numOfDaysInRange,
   } = useScheduleContext();
-  console.log(numOfDaysInRange);
+ 
 
   const todayDayArr = TODAY_DAY.split("T")[0]
     .split("-")
