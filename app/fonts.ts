@@ -5,6 +5,7 @@ export const imbue = Imbue({
   weight: "700",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: false,
 });
 export const roboto = Roboto({
   weight: ["400", "500", "700"],
