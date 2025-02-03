@@ -1,5 +1,5 @@
 import { add, addHours, format, formatISO, isBefore } from "date-fns";
-import { BookingTypes, ScheduleTypes } from "../_lib/types";
+import { BookingTypes, MemberDataType, ScheduleTypes } from "../_lib/types";
 import { getServerSession } from "next-auth";
 import { addBookingAction } from "../_lib/action";
 import toast from "react-hot-toast";
@@ -9,11 +9,12 @@ import { pl } from "date-fns/locale/pl";
 export default function ScheduleEvent({
   training,
   bookings,
-  memberId,
+  member,
 }: {
   training: ScheduleTypes;
   bookings: BookingTypes[] | undefined;
-  memberId: number | undefined;
+  member: MemberDataType[] | undefined;
+
 }) {
   const scheduleEventBookings = bookings?.filter(
     (booking) => booking.date === training.date,
@@ -21,15 +22,15 @@ export default function ScheduleEvent({
   const numOfBookings = scheduleEventBookings?.length;
 
   const isBooked = scheduleEventBookings?.some(
-    (booking) => booking.memberId === memberId,
-  );
+    (booking) => booking.memberId === member?.at(0)?.id,
+  ) as boolean;
 
   const currentDatePlusOneHour = formatISO(add(TODAY_DAY, { hours: 1 }));
 
   const isPassedDate = isBefore(training.date, currentDatePlusOneHour);
 
   const bookingData = {
-    memberId,
+    memberId: member?.at(0)?.id,
     date: training.date,
     status: "niepotwierdzona",
     trainerId: training.trainerId,
@@ -39,10 +40,9 @@ export default function ScheduleEvent({
     date: string;
     status: string;
     trainerId: number;
-    memberId: number | undefined;
+    memberId: number;
   }) {
-    console.log(bookingData);
-    const result = await addBookingAction(bookingData, isBooked);
+    const result = await addBookingAction(bookingData, isBooked)
     if (result?.message) {
       toast.error(result?.message);
     } else {

@@ -10,7 +10,12 @@ import {
   subDays,
 } from "date-fns";
 import { useScheduleContext } from "../_context/ScheduleContext";
-import { BookingTypes, HoursTypes, ScheduleTypes } from "../_lib/types";
+import {
+  BookingTypes,
+  HoursTypes,
+  MemberDataType,
+  ScheduleTypes,
+} from "../_lib/types";
 import { TODAY_DAY } from "../_utils/constants";
 import ScheduleEvent from "./ScheduleEvent";
 
@@ -18,12 +23,13 @@ export default function Schedule({
   openHours,
   schedule,
   bookings,
-  memberId,
+  member,
 }: {
   openHours: HoursTypes | undefined;
   schedule: ScheduleTypes[] | undefined;
   bookings: BookingTypes[] | undefined;
-  memberId: number | undefined;
+
+  member: MemberDataType[] | undefined;
 }) {
   const {
     firstDay,
@@ -33,8 +39,8 @@ export default function Schedule({
     trainer,
     numOfDaysInRange,
   } = useScheduleContext();
- 
 
+  console.log(member);
   const todayDayArr = TODAY_DAY.split("T")[0]
     .split("-")
     .map((num) => Number(num));
@@ -122,13 +128,12 @@ export default function Schedule({
                           key={training.id}
                           training={training}
                           bookings={bookings}
-                          memberId={memberId}
+                          member={member}
                         />
                       ),
                   )}
                 </div>
               ))}
-
             </div>
           ))}
         </div>

@@ -11,6 +11,8 @@ import { ContactFormSchema } from "../_validation/contactFormSchema";
 import { SignUpFormSchema } from "../_validation/signUpFormSchema";
 import { supabase } from "./supabase";
 import { getServerSession } from "next-auth";
+import { TODAY_DAY } from "../_utils/constants";
+import { getMemberPurchasedMemberships } from "./data";
 
 type ContactFormTypes = z.infer<typeof ContactFormSchema>;
 type SignupFormTypes = z.infer<typeof SignUpFormSchema>;
@@ -27,7 +29,12 @@ export async function sendEmail(data: ContactFormTypes) {
         from: "Trenuj|My <onboarding@resend.dev>",
         to: ["trenujmy3@gmail.com"],
         subject: "Wiadomość z formularza kontaktowego",
-        react: EmailTemplate({ firstName, lastName : lastNameContact, email, message }),
+        react: EmailTemplate({
+          firstName,
+          lastName: lastNameContact,
+          email,
+          message,
+        }),
       });
       return { success: true, data };
     } catch (error) {
@@ -116,18 +123,38 @@ export async function editMemberDataAction(
   redirect("/user/profile");
 }
 
-export async function addBookingAction(bookingData: {
-  date: string;
-  status: string;
-  trainerId: number;
-  memberId: number | undefined;
-}, isBooked: boolean | undefined) {
-
+export async function addBookingAction(
+  bookingData: {
+    date: string;
+    status: string;
+    trainerId: number;
+    memberId: number;
+  },
+  isBooked: boolean,
+) {
   try {
     const session = await getServerSession();
     if (!session) throw new Error("Musisz być zalogowany!");
-    if(isBooked) throw new Error('Zajęcia zostały już zarezerwowane!')
-    
+    const userMemberships = await getMemberPurchasedMemberships(
+      bookingData.memberId,
+    );
+
+    // const todayDay = TODAY_DAY.toString().slice(0, 10);
+    const activeMembership = userMemberships?.filter(
+      (membership) =>
+        TODAY_DAY >= membership.startDay &&
+        TODAY_DAY <= membership.endDay &&
+        membership.isValid,
+    );
+
+    const haveActiveMembership = Boolean(activeMembership?.length);
+    if (haveActiveMembership === false)
+      throw new Error(
+        "Brak aktywnego karnetu. Zakup karnet aby uzyskać możliwość rezerwacji zajęć.",
+      );
+
+    if (isBooked) throw new Error("Zajęcia zostały już zarezerwowane!");
+
     const { data, error } = await supabase
       .from("bookings")
       .insert([bookingData])
