@@ -13,9 +13,9 @@ async function Header() {
       <header className="z-100 m-auto flex h-24 w-11/12 max-w-[1300px] items-center justify-between">
         <Logo />
         <Nav />
-        <div className="mr-12 lg:mr-0">
+        <div className="text-sm md:text-lg mr-12 lg:mr-0">
           {session?.user?.email ? (
-            <div className="flex gap-10">
+            <div className="flex gap-5  md:gap-10">
               <div className="text-accentColor flex">
                 <Link
                   href="/user/profile"

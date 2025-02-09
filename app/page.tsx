@@ -16,7 +16,7 @@ export default async function Page() {
         className="z-[-20] object-cover object-bottom"
       />
       <div
-        className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight  md:text-6xl lg:w-[42rem]`}
+        className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight md:text-6xl lg:w-[42rem]`}
       >
         <div className="mb-14">
           <h1 className="uppercase leading-snug text-accentColor/60">
@@ -29,16 +29,16 @@ export default async function Page() {
             grupowych.
           </p>
         </div>
-        <div>
+        <div className="flex flex-col min-[350px]:flex-row">
           <Link
             href={session ? "/user/bookings" : "/login"}
-            className="mb-6 mr-10 bg-accentColor px-6 py-2 text-xl font-semibold uppercase tracking-widest text-darkGray transition-all hover:scale-110 md:self-end md:text-3xl"
+            className="mb-6 mr-10 self-start bg-accentColor px-6 py-2 text-xl font-semibold uppercase tracking-widest text-darkGray transition-all hover:scale-110 md:self-end md:text-3xl"
           >
             Zarezerwuj
           </Link>
           <Link
             href="/about"
-            className="mb-6 self-center border border-accentColor px-6 py-2 text-xl font-semibold uppercase tracking-widest text-accentColor transition-all hover:scale-110 md:self-end md:text-3xl"
+            className="mb-6 self-start border border-accentColor px-6 py-2 text-xl font-semibold uppercase tracking-widest text-accentColor transition-all hover:scale-110 md:self-end md:text-3xl"
           >
             O nas
           </Link>
