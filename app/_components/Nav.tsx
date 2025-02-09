@@ -3,7 +3,7 @@
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Nav() {
   const pathname = usePathname();
@@ -36,6 +36,11 @@ function Nav() {
     },
   ];
 
+  useEffect(() => {
+    // hide sidebar only on path change
+    setShowMobileNav(false);
+  }, [pathname]);
+
   return (
     <>
       <button
@@ -59,12 +64,7 @@ function Nav() {
                 pathname === item.url ? "text-accentColor" : "text-textLight"
               }`}
             >
-              <Link
-                href={item.url}
-                onClick={() => setShowMobileNav(!showMobileNav)}
-              >
-                {item.label}
-              </Link>
+              <Link href={item.url}>{item.label}</Link>
             </li>
           ))}
         </ul>
