@@ -59,7 +59,12 @@ function Nav() {
                 pathname === item.url ? "text-accentColor" : "text-textLight"
               }`}
             >
-              <Link href={item.url}>{item.label}</Link>
+              <Link
+                href={item.url}
+                onClick={() => setShowMobileNav(!showMobileNav)}
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
