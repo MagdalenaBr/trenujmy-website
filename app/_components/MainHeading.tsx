@@ -8,7 +8,7 @@ export default function MainHeading({
 }) {
   return (
     <h1
-      className={`py-12 text-center text-8xl uppercase text-darkGray ${imbue.className}`}
+      className={`py-12 text-center text-6xl  lg:text-8xl uppercase text-darkGray ${imbue.className}`}
     >
       {children}
     </h1>

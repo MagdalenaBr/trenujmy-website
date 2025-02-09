@@ -17,9 +17,11 @@ export default function SelectTrainer({
         onChange={(e) => setTrainer(e.target.value)}
         className="bg-transparent px-2 text-center text-xl uppercase"
       >
-        <option value="all">trener</option>
+        <option className="text-base" value="all">
+          trener
+        </option>
         {groupTrainers.map((trainer) => (
-          <option key={trainer.id} value={trainer.name}>
+          <option className="text-base" key={trainer.id} value={trainer.name}>
             {trainer.name}
           </option>
         ))}
