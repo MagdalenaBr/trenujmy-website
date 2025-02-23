@@ -12,7 +12,8 @@ import { SignUpFormSchema } from "../_validation/signUpFormSchema";
 import { supabase } from "./supabase";
 import { getServerSession } from "next-auth";
 import { TODAY_DAY } from "../_utils/constants";
-import { getMemberPurchasedMemberships } from "./data";
+import { getMemberData, getMemberPurchasedMemberships } from "./data";
+import { addDays, addMonths } from "date-fns";
 
 type ContactFormTypes = z.infer<typeof ContactFormSchema>;
 type SignupFormTypes = z.infer<typeof SignUpFormSchema>;
@@ -139,7 +140,6 @@ export async function addBookingAction(
       bookingData.memberId,
     );
 
-    // const todayDay = TODAY_DAY.toString().slice(0, 10);
     const activeMembership = userMemberships?.filter(
       (membership) =>
         TODAY_DAY >= membership.startDay &&
@@ -169,4 +169,55 @@ export async function addBookingAction(
   } catch (error: any) {
     return { message: error.message };
   }
+}
+
+export async function chooseGymMembershipAction(
+  membershipId: number,
+  membershipPrice: number,
+) {
+  const session = await getServerSession();
+  if (!session) throw new Error("Musisz być zalogowany!");
+
+  const member = await (
+    await getMemberData(session.user?.email as string)
+  ).at(0);
+  const purchasedMemberships = await getMemberPurchasedMemberships(
+    member?.id as number,
+  );
+
+  const activeMembership = !!purchasedMemberships?.find(
+    (membership) => membership.isValid === true,
+  );
+  if (activeMembership) throw new Error("Posiadasz już aktywny karnet.");
+
+  function calculateEndDay(id: number) {
+    switch (id) {
+      case 1:
+        return addDays(TODAY_DAY, 1);
+      case 2:
+        return addMonths(TODAY_DAY, 1);
+      case 3:
+        return addMonths(TODAY_DAY, 6);
+      case 4:
+        return addMonths(TODAY_DAY, 12);
+    }
+  }
+
+  const endDay = calculateEndDay(membershipId);
+
+  const { data, error } = await supabase
+    .from("purchasedMemberships")
+    .insert([
+      {
+        startDay: TODAY_DAY,
+        endDay,
+        memberId: member?.id,
+        gymMembershipId: membershipId,
+        isValid: true,
+        price: membershipPrice,
+      },
+    ])
+    .select();
+
+  // if(activeMembership.isValid)
 }

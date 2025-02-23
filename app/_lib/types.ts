@@ -67,3 +67,10 @@ export interface TrainerTypes {
   phone: string;
   image: string;
 }
+
+export interface GymMembershipTypes {
+  id: number;
+  created_at: string;
+  gymMembershipName: string;
+  price: number;
+}
