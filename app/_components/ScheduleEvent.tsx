@@ -6,6 +6,13 @@ import toast from "react-hot-toast";
 import { TODAY_DAY } from "../_utils/constants";
 import { pl } from "date-fns/locale/pl";
 
+type BookingDataTypes = {
+  date: string;
+  status: string;
+  trainerId: number;
+  memberId: number;
+};
+
 export default function ScheduleEvent({
   training,
   bookings,
@@ -14,7 +21,6 @@ export default function ScheduleEvent({
   training: ScheduleTypes;
   bookings: BookingTypes[] | undefined;
   member: MemberDataType[] | undefined;
-
 }) {
   const scheduleEventBookings = bookings?.filter(
     (booking) => booking.date === training.date,
@@ -36,13 +42,8 @@ export default function ScheduleEvent({
     trainerId: training.trainerId,
   };
 
-  async function addBooking(bookingData: {
-    date: string;
-    status: string;
-    trainerId: number;
-    memberId: number;
-  }) {
-    const result = await addBookingAction(bookingData, isBooked)
+  async function addBooking(bookingData: BookingDataTypes) {
+    const result = await addBookingAction(bookingData, isBooked);
     if (result?.message) {
       toast.error(result?.message);
     } else {
@@ -68,7 +69,7 @@ export default function ScheduleEvent({
       </p>
       <button
         disabled={isBooked || isPassedDate}
-        onClick={() => addBooking(bookingData)}
+        onClick={() => addBooking(bookingData as BookingDataTypes)}
         className={`w-full bg-accentColor p-1 font-semibold uppercase tracking-wider hover:bg-transparent hover:text-accentColor ${isBooked && `bg-transparent text-accentColor`} ${isPassedDate && `bg-transparent text-gray-500 hover:text-gray-500`} `}
       >
         {isBooked ? " Zarezerwowano" : "Zarezerwuj"}
