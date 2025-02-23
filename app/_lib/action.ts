@@ -175,21 +175,6 @@ export async function chooseGymMembershipAction(
   membershipId: number,
   membershipPrice: number,
 ) {
-  const session = await getServerSession();
-  if (!session) throw new Error("Musisz być zalogowany!");
-
-  const member = await (
-    await getMemberData(session.user?.email as string)
-  ).at(0);
-  const purchasedMemberships = await getMemberPurchasedMemberships(
-    member?.id as number,
-  );
-
-  const activeMembership = !!purchasedMemberships?.find(
-    (membership) => membership.isValid === true,
-  );
-  if (activeMembership) throw new Error("Posiadasz już aktywny karnet.");
-
   function calculateEndDay(id: number) {
     switch (id) {
       case 1:
@@ -203,21 +188,43 @@ export async function chooseGymMembershipAction(
     }
   }
 
-  const endDay = calculateEndDay(membershipId);
+  try {
+    const session = await getServerSession();
+    if (!session) throw new Error("Musisz być zalogowany!");
 
-  const { data, error } = await supabase
-    .from("purchasedMemberships")
-    .insert([
-      {
-        startDay: TODAY_DAY,
-        endDay,
-        memberId: member?.id,
-        gymMembershipId: membershipId,
-        isValid: true,
-        price: membershipPrice,
-      },
-    ])
-    .select();
+    const member = await (
+      await getMemberData(session.user?.email as string)
+    ).at(0);
+    const purchasedMemberships = await getMemberPurchasedMemberships(
+      member?.id as number,
+    );
 
-  // if(activeMembership.isValid)
+    const activeMembership = !!purchasedMemberships?.find(
+      (membership) => membership.isValid === true,
+    );
+    if (activeMembership) throw new Error("Posiadasz już aktywny karnet.");
+
+    const endDay = calculateEndDay(membershipId);
+
+    const { data, error } = await supabase
+      .from("purchasedMemberships")
+      .insert([
+        {
+          startDay: TODAY_DAY,
+          endDay,
+          memberId: member?.id,
+          gymMembershipId: membershipId,
+          isValid: true,
+          price: membershipPrice,
+        },
+      ])
+      .select();
+
+    if (error)
+      throw new Error(
+        "Wystąpił problem z aktywacją karnetu. Spróbuj ponownie.",
+      );
+  } catch (error: any) {
+    return { message: error.message };
+  }
 }

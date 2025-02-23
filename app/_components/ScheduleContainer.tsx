@@ -13,8 +13,6 @@ import ResetButton from "./ResetButton";
 import Schedule from "./Schedule";
 import SectionContainer from "./SectionContainer";
 import SelectTrainer from "./SelectTrainer";
-import { boolean } from "zod";
-import { TODAY_DAY } from "../_utils/constants";
 
 export default async function ScheduleContainer() {
   const session = await getServerSession();

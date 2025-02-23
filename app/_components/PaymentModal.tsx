@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { chooseGymMembershipAction } from "../_lib/action";
 import { ModalContext } from "./Modal";
 import { GymMembershipTypes } from "../_lib/types";
+import toast from "react-hot-toast";
 
 export default function PaymentModal({
   gymMembership,
@@ -11,6 +12,23 @@ export default function PaymentModal({
   const context = useContext(ModalContext);
   if (context === null) return null;
   const { setIsOpen } = context;
+
+  async function chooseGymMembership(
+    gymMembershipId: number,
+    gymMembershipPrice: number,
+  ) {
+    const result = await chooseGymMembershipAction(
+      gymMembershipId,
+      gymMembershipPrice,
+    );
+    if (result?.message) {
+      toast.error(result?.message);
+    } else {
+      toast.success(
+        "Karnet został aktywowany. Opłać karnet przy najbliższej wizycie w klubie.",
+      );
+    }
+  }
 
   return (
     <div className="z-50 w-80 rounded-md border bg-white p-8 shadow-lg md:w-96">
@@ -29,7 +47,7 @@ export default function PaymentModal({
           </button>
           <button
             onClick={() => {
-              chooseGymMembershipAction(gymMembership.id, gymMembership.price);
+              chooseGymMembership(gymMembership.id, gymMembership.price);
               setIsOpen("");
             }}
             className="w-20 rounded-md border-2 border-accentColor px-4 py-2 text-base font-medium text-accentColor shadow-sm hover:bg-accentColor/40 focus:outline-none focus:ring-2 focus:ring-gray-300"
