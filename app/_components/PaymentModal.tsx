@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import { chooseGymMembershipAction } from "../_lib/action";
 import { ModalContext } from "./Modal";
@@ -14,7 +13,7 @@ export default function PaymentModal({
   const { setIsOpen } = context;
 
   return (
-    <div className="z-50 w-96 rounded-md border bg-white p-8 shadow-lg">
+    <div className="z-50 w-80 rounded-md border bg-white p-8 shadow-lg md:w-96">
       <div className="text-center">
         <div className="mt-2 px-7 py-3">
           <p className="text-lg font-bold text-darkGray">
