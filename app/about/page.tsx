@@ -10,6 +10,11 @@ import SportAactivityContainer from "../_components/SportActivityContainer";
 import TextContainer from "../_components/TextContainer";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
+import { Metadata } from "next";
+
+export const metadata: Metadata ={
+title:'O nas'
+}
 
 export default async function Page() {
   const session = await getServerSession();

@@ -6,13 +6,18 @@ import Image from "next/image";
 import { imbue } from "../fonts";
 import TextContainer from "../_components/TextContainer";
 import Footer from "../_components/Footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kadra",
+};
 
 export default async function Page() {
   const trainers = await getTrainers();
   return (
     /*trainer card*/
     <>
-      <div className="bg-sectionTrainersMainSm relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-bottom md:h-[40rem] md:bg-sectionTrainersMain"></div>
+      <div className="relative z-[-20] h-[30rem] w-screen bg-sectionTrainersMainSm bg-cover bg-fixed bg-bottom md:h-[40rem] md:bg-sectionTrainersMain"></div>
       <div className="bg-textLight">
         <MainHeading>Kadra</MainHeading>
         <div className="pb-20">

@@ -12,7 +12,8 @@ export default async function Page() {
       <Image
         src={bg}
         fill
-        alt="Kobieta ćwicząca na siłowni"
+        placeholder="blur"
+        alt="Mężczyzna ćwiczący na siłowni"
         className="z-[-20] object-cover object-bottom"
       />
       <div

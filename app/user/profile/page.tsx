@@ -7,8 +7,13 @@ import {
 import { TODAY_DAY, TODAY_DAY_END } from "@/app/_utils/constants";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { format, parseISO } from "date-fns";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Profil",
+};
 
 export default async function Page() {
   const session = await getServerSession();

@@ -3,9 +3,14 @@ import SectionContainer from "../_components/SectionContainer";
 import Footer from "../_components/Footer";
 import { getGymMembershipPrices } from "../_lib/data";
 import MembershipOption from "../_components/MembershipOption";
+import { Metadata } from "next";
 
 type SearchParamProps = {
   searchParams: Record<string, string> | null | undefined;
+};
+
+export const metadata: Metadata = {
+  title: "Cennik",
 };
 
 export default async function Page({ searchParams }: SearchParamProps) {

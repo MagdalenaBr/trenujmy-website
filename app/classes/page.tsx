@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import ScheduleContainer from "../_components/ScheduleContainer";
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: "Zajęcia",
+};
 
 export default async function Page() {
   return (

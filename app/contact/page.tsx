@@ -2,6 +2,11 @@ import Footer from "../_components/Footer";
 import ContactForm from "../_components/ContactForm";
 import MainHeading from "../_components/MainHeading";
 import SectionContainer from "../_components/SectionContainer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kontakt",
+};
 
 export default function Page() {
   return (
@@ -12,7 +17,7 @@ export default function Page() {
         <SectionContainer>
           <ContactForm />
         </SectionContainer>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

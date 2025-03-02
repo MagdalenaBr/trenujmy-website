@@ -2,6 +2,11 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import SignUpForm from "../_components/SignUpForm";
 import { imbue } from "../fonts";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rejestracja",
+};
 
 export default async function Page() {
   const session = await getServerSession();

@@ -1,6 +1,5 @@
 import { add, addHours, format, formatISO, isBefore } from "date-fns";
 import { BookingTypes, MemberDataType, ScheduleTypes } from "../_lib/types";
-import { getServerSession } from "next-auth";
 import { addBookingAction } from "../_lib/action";
 import toast from "react-hot-toast";
 import { TODAY_DAY } from "../_utils/constants";

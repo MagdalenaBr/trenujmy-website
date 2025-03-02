@@ -1,8 +1,13 @@
 import Booking from "@/app/_components/Booking";
 import SortBookings from "@/app/_components/SortBookings";
 import { getMemberBookings, getMemberData } from "@/app/_lib/data";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+
+export const metadata: Metadata ={
+  title:'Rezerwacje'
+  }
 
 export default async function Page({
   searchParams,
