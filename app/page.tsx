@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getServerSession } from "next-auth";
-import bg from "../public/main-page.jpg";
+import bgDesktop from "../public/hero-start-desktop.jpg";
+import bgMobile from "../public/hero-start-mobile.jpg";
 import { imbue, roboto } from "./fonts";
 import Link from "next/link";
 
@@ -10,11 +11,18 @@ export default async function Page() {
   return (
     <div className="m-auto flex h-[92%] w-11/12 max-w-[1400px] flex-col justify-end">
       <Image
-        src={bg}
+        src={bgDesktop}
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
-        className="z-[-20] object-cover object-bottom"
+        className="z-[-20] hidden object-cover object-bottom md:block"
+      />
+      <Image
+        src={bgMobile}
+        fill
+        placeholder="blur"
+        alt="Mężczyzna ćwiczący na siłowni"
+        className="z-[-20] object-cover object-bottom md:hidden"
       />
       <div
         className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight md:text-6xl lg:w-[42rem]`}
