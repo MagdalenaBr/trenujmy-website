@@ -19,6 +19,7 @@ async function Header() {
               <div className="text-accentColor flex">
                 <Link
                   href="/user/profile"
+                  aria-label="Profil użytkownika"
                   className="h-10 w-10 text-accentColor"
                 >
                   <UserIcon />
