@@ -41,12 +41,14 @@ export default async function Page() {
         <div className="flex flex-col min-[350px]:flex-row">
           <Link
             href={session ? "/user/bookings" : "/login"}
+            aria-label="Zarezerwuj zajęcia"
             className="mb-6 mr-10 self-start bg-accentColor px-6 py-2 text-xl font-semibold uppercase tracking-widest text-darkGray transition-all hover:scale-110 md:self-end md:text-3xl"
           >
             Zarezerwuj
           </Link>
           <Link
             href="/about"
+            aria-label="O nas"
             className="mb-6 self-start border border-accentColor px-6 py-2 text-xl font-semibold uppercase tracking-widest text-accentColor transition-all hover:scale-110 md:self-end md:text-3xl"
           >
             O nas
