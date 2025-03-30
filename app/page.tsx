@@ -15,14 +15,14 @@ export default async function Page() {
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
-        className="z-[-20] hidden object-cover object-bottom md:block"
+        className="z-[-20] hidden h-screen object-cover object-bottom md:block"
       />
       <Image
         src={bgMobile}
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
-        className="z-[-20] object-cover object-bottom md:hidden"
+        className="z-[-20] h-screen object-cover object-bottom md:hidden"
       />
       <div
         className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight md:text-6xl lg:w-[42rem]`}
