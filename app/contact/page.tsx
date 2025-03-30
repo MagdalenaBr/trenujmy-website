@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <div className="relative z-[-20] h-[30rem] w-screen bg-contactMainSm bg-cover bg-fixed bg-bottom grayscale md:h-[40rem] md:bg-contactMain"></div>
+      <div className="relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-bottom grayscale md:h-[40rem] bg-contactMain"></div>
       <div className="bg-textLight">
         <MainHeading>Kontakt</MainHeading>
         <SectionContainer>
