@@ -9,7 +9,7 @@ export default async function Page() {
   const session = await getServerSession();
 
   return (
-    <div className="m-auto flex h-[92%] w-11/12 max-w-[1400px] flex-col justify-end overflow-hidden">
+    <div className="m-auto flex h-screen w-11/12 max-w-[1400px] flex-col justify-end overflow-hidden">
       <Image
         src={bgDesktop}
         fill
