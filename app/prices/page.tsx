@@ -17,7 +17,7 @@ export default async function Page({ searchParams }: SearchParamProps) {
   const gymMembershipPrices = await getGymMembershipPrices();
   return (
     <>
-      <div className="relative z-[-20] h-[30rem] w-screen bg-sectionPricesMainSm bg-cover bg-fixed bg-top md:h-[40rem] md:bg-sectionPricesMain"></div>
+      <div className="relative z-[-20] h-[30rem] w-screen bg-cover bg-fixed bg-top md:h-[40rem] bg-sectionPricesMain"></div>
       <div className="bg-textLight">
         <MainHeading>Cennik</MainHeading>
         <SectionContainer>
