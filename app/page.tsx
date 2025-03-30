@@ -9,14 +9,13 @@ export default async function Page() {
   const session = await getServerSession();
 
   return (
-    <div className="m-auto flex h-[92%] w-11/12 max-w-[1400px] flex-col justify-end">
+    <div className="m-auto flex h-screen w-screen max-w-[1400px] flex-col justify-end">
       <Image
         src={bgDesktop}
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
         className="z-[-20] hidden object-cover object-bottom md:block"
-
       />
       <Image
         src={bgMobile}
@@ -24,7 +23,6 @@ export default async function Page() {
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
         className="z-[-20] object-cover object-bottom md:hidden"
-     
       />
       <div
         className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight md:text-6xl lg:w-[42rem]`}
