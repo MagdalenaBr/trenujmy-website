@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     template: "%s | Trenuj|My",
     default: "Trenuj|My",
   },
-  description: "Dołącz do naszej siłowni i osiągnij swój cel! Oferujemy szeroki wybór sprzętu, profesjonalne treningi i przyjazną atmosferę. Sprawdź naszą ofertę i zacznij swoją przygodę z aktywnością fizyczną już teraz!"
+  description:
+    "Dołącz do naszej siłowni i osiągnij swój cel! Oferujemy szeroki wybór sprzętu, profesjonalne treningi i przyjazną atmosferę. Sprawdź naszą ofertę i zacznij swoją przygodę z aktywnością fizyczną już teraz!",
 };
 
 export default function RootLayout({
@@ -25,7 +26,9 @@ export default function RootLayout({
         <Toaster />
         <Header />
 
-        <main className="tra h-screen w-full bg-black/30">{children}</main>
+        <main className="tra h-screen w-full overflow-hidden bg-black/30">
+          {children}
+        </main>
       </body>
     </html>
   );
