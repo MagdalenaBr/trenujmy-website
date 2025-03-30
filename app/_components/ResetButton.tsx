@@ -15,10 +15,11 @@ export default function ResetButton() {
 
   return (
     <button
+    aria-labelledby="labelspan"
       onClick={handleClick}
       className="flex items-center justify-center gap-4 border border-darkGray shadow-md shadow-darkGray"
     >
-      <span className="px-2 text-xl uppercase">reset</span>
+      <span id="labelspan" className="px-2 text-xl uppercase">reset</span>
     </button>
   );
 }

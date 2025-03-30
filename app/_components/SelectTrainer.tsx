@@ -16,6 +16,7 @@ export default function SelectTrainer({
         value={trainer}
         onChange={(e) => setTrainer(e.target.value)}
         className="bg-transparent px-2 text-center text-xl uppercase"
+        aria-label="Wybierz trenera"
       >
         <option className="text-base" value="all">
           trener

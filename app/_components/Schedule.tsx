@@ -98,6 +98,7 @@ export default function Schedule({
   return (
     <div className="flex">
       <button
+        aria-label="Cofnij kalendarz"
         onClick={changeWeekBackwards}
         className="mx-2 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor transition-transform hover:scale-105 lg:mx-4"
       >
@@ -141,6 +142,7 @@ export default function Schedule({
 
       <button
         onClick={changeWeekForward}
+        aria-label="Przesuń kalendarz do przodu"
         className="mx-2 w-12 self-start border-2 border-accentColor px-2 py-1 shadow-sm shadow-accentColor transition-transform hover:scale-105 lg:mx-4"
       >
         <ChevronRightIcon />

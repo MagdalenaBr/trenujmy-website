@@ -44,6 +44,7 @@ function Nav() {
   return (
     <>
       <button
+        aria-label="Menu"
         onClick={() => setShowMobileNav(!showMobileNav)}
         className="absolute right-2 top-6 z-[1000] w-10 text-textLight md:w-14 lg:hidden"
       >
@@ -64,7 +65,9 @@ function Nav() {
                 pathname === item.url ? "text-accentColor" : "text-textLight"
               }`}
             >
-              <Link href={item.url}>{item.label}</Link>
+              <Link aria-label={item.label} href={item.url}>
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>

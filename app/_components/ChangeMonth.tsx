@@ -32,11 +32,11 @@ export default function ChangeMonth() {
 
   return (
     <div className="flex items-center justify-between border border-darkGray shadow-md shadow-darkGray">
-      <button onClick={subMonth}>
+      <button aria-label="Poprzedni miesiąc" onClick={subMonth}>
         <ChevronLeftIcon className="w-8" />
       </button>
       <p className="w-32 text-center text-xl uppercase">{currMonthName}</p>
-      <button onClick={addMonth}>
+      <button aria-label="Następny miesiąc" onClick={addMonth}>
         <ChevronRightIcon className="w-8" />
       </button>
     </div>
