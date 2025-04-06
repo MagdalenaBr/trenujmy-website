@@ -9,20 +9,20 @@ export default async function Page() {
   const session = await getServerSession();
 
   return (
-    <div className="m-auto flex h-screen w-11/12 max-w-[1400px] flex-col justify-end overflow-hidden">
+    <div className="m-auto mt-24 flex h-screen w-11/12 max-w-[1400px] flex-col justify-end overflow-hidden">
       <Image
         src={bgDesktop}
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
-        className="z-[-20] hidden  object-cover object-bottom md:block"
+        className="z-[-20] hidden object-cover object-bottom md:block"
       />
       <Image
         src={bgMobile}
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
-        className="z-[-20] object-cover object-bottom  md:hidden"
+        className="z-[-20] object-cover object-bottom md:hidden"
       />
       <div
         className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight md:text-6xl lg:w-[42rem]`}
@@ -38,7 +38,7 @@ export default async function Page() {
             grupowych.
           </p>
         </div>
-        <div className="flex flex-col pb-10 min-[350px]:flex-row">
+        <div className="flex flex-col min-[350px]:flex-row">
           <Link
             href={session ? "/user/bookings" : "/login"}
             aria-label="Zarezerwuj zajęcia"
