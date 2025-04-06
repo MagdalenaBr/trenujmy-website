@@ -38,7 +38,7 @@ export default async function Page() {
             grupowych.
           </p>
         </div>
-        <div className="flex flex-col min-[350px]:flex-row">
+        <div className="flex flex-col pb-10 min-[350px]:flex-row">
           <Link
             href={session ? "/user/bookings" : "/login"}
             aria-label="Zarezerwuj zajęcia"
