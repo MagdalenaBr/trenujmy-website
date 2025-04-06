@@ -21,12 +21,12 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body
-        className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
+        className={`${roboto.className} flex flex-col items-center overflow-x-hidden transition-all`}
       >
         <Toaster />
         <Header />
 
-        <main className="h-dvh w-full bg-black/30">{children}</main>
+        <main className="min-h-screen w-full bg-black/30">{children}</main>
       </body>
     </html>
   );
