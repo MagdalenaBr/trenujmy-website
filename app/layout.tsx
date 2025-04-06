@@ -26,7 +26,9 @@ export default function RootLayout({
         <Toaster />
         <Header />
 
-        <main className="w-full overflow-y-hidden bg-black/30">{children}</main>
+        <main className="h-screen w-screen overflow-y-hidden bg-black/30">
+          {children}
+        </main>
       </body>
     </html>
   );
