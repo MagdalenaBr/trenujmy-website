@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     template: "%s | Trenuj|My",
     default: "Trenuj|My",
   },
-  description: "Dołącz do naszej siłowni i osiągnij swój cel! Oferujemy szeroki wybór sprzętu, profesjonalne treningi i przyjazną atmosferę. Sprawdź naszą ofertę i zacznij swoją przygodę z aktywnością fizyczną już teraz!"
+  description:
+    "Dołącz do naszej siłowni i osiągnij swój cel! Oferujemy szeroki wybór sprzętu, profesjonalne treningi i przyjazną atmosferę. Sprawdź naszą ofertę i zacznij swoją przygodę z aktywnością fizyczną już teraz!",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body
-        className={`${roboto.className} flex min-h-screen flex-col items-center overflow-x-hidden transition-all`}
+        className={`${roboto.className} flex h-dvh items-center overflow-x-hidden transition-all`}
       >
         <Toaster />
         <Header />
