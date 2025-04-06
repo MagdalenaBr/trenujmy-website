@@ -26,7 +26,7 @@ export default function RootLayout({
         <Toaster />
         <Header />
 
-        <main className="h-screen w-full bg-black/30">{children}</main>
+        <main className="h-dvh w-full bg-black/30">{children}</main>
       </body>
     </html>
   );

@@ -22,7 +22,7 @@ export default async function Page() {
         fill
         placeholder="blur"
         alt="Mężczyzna ćwiczący na siłowni"
-        className="z-[-20] h-full object-cover object-bottom pb-32 md:hidden"
+        className="z-[-20] h-full object-cover object-bottom  md:hidden"
       />
       <div
         className={`${imbue.className} flex flex-col p-5 text-5xl text-textLight md:text-6xl lg:w-[42rem]`}
