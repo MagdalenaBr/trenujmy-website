@@ -25,8 +25,11 @@ export default function RootLayout({
       >
         <Toaster />
         <Header />
-
-        <main className="mx-auto w-full max-w-7xl bg-black/30">{children}</main>
+        <div className="grid flex-1 px-8 py-12">
+          <main className="mx-auto w-full max-w-7xl bg-black/30">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
